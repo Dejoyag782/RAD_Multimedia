@@ -71,17 +71,29 @@
         $('#toggleDatatables').click(function () {
             isArchived = !isArchived;
             updateIcon();
+            updateHeader();
             updateDataTable();
         });
         
         });
 
+        // Archive Button Icon Changer
         function updateIcon() {
             const icon = $('#toggleIcon');
             if (isArchived) {
                 icon.removeClass('fa-eye').addClass('fa-eye-slash');
             } else {
                 icon.removeClass('fa-eye-slash').addClass('fa-eye');
+            }
+        }
+
+        // Header Name Toggler
+        function updateHeader() {
+            const header = $('#toggleHeader');
+            if (isArchived) {
+                header.text('Review or Remove | Archived Messages ');
+            } else {
+                header.text('Review, Archive or Remove | Messages ');
             }
         }
         
