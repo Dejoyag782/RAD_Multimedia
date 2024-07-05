@@ -21,13 +21,13 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-12 bg-dark" style="padding: 10px 10px 40px 10px;">
                                         <ul class="list-group timeline">
-                                            <li class="list-group-item">
+                                            <li class="list-group-item  bg-dark timeline">
                                                 <div class="timeline-image"><img class="rounded-circle img-fluid" src="welcome_assets/img/about/1.jpg"></div>
                                                 <div class="timeline-panel">
-                                                    <div class="timeline-heading">
-                                                        <h4>November 2023</h4>
+                                                    <div class="timeline-heading text-light">
+                                                        <h4 >November 2023</h4>
                                                         <h4 class="subheading">How we Began</h4>
                                                     </div>
                                                     <div class="timeline-body">
@@ -35,10 +35,10 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="list-group-item d-xxl-flex flex-row justify-content-xxl-end">
+                                            <li class="list-group-item bg-dark timeline-inverted">
                                                 <div class="timeline-image"><img class="rounded-circle img-fluid" src="welcome_assets/img/about/2.jpg"></div>
                                                 <div class="text-start timeline-panel" style="padding-left: 20px;padding-right: 100px;">
-                                                    <div class="timeline-heading">
+                                                    <div class="timeline-heading text-light">
                                                         <h4>January 2024</h4>
                                                         <h4 class="subheading">Another Milestone</h4>
                                                     </div>
@@ -47,7 +47,7 @@
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="list-group-item timeline-inverted">
+                                            <li class="list-group-item  bg-dark ">
                                                 <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xxl-center align-items-xxl-center timeline-image"><i class="fa fa-plus" style="font-size: 50pt;"></i></div>
                                             </li>
                                         </ul>
