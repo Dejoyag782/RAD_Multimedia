@@ -2,15 +2,22 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\DashController;
+ 
 
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
 Route::middleware(['auth', 'verified'])->group(function () {
+
     Route::get('/dashboard', function () {
         return view('dashboard.dash.index');
     })->name('dashboard');
+
+    Route::get('/dashboard', [DashController::class, 'index'])->name('dashboard');
+
 
     Route::get('/services', function () {
         return view('dashboard.services.index');
@@ -35,6 +42,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/users', function () {
         return view('dashboard.users.index');
     })->name('users');
+
+    
+    Route::get('/messages', [MessageController::class, 'index'])->name('messages');
+    Route::post('/get-messages', [MessageController::class, 'getMessages'])->name('getMessages');    
+    Route::post('/get-archived-messages', [MessageController::class, 'getArchivedMessages'])->name('getArchivedMessages');
+    Route::post('/archive-message', [MessageController::class, 'archiveMessage'])->name('archiveMessage');    
+    Route::post('/delete-message', [MessageController::class, 'deleteMessage'])->name('deleteMessage');
+    Route::get('/messages/{id}', [MessageController::class, 'showMessage']);
+
+
 });
 
 

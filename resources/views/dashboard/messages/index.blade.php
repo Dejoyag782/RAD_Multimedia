@@ -15,6 +15,33 @@
                         <section id="messages" style="padding-top: 10px;">
                             <div class="container">
                                 
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12 text-center">
+                                            <h4 class="text-uppercase text-start section-heading d-flex justify-content-between">Messages <a class="btn btn-warning" id="toggleDatatables" style=" color: rgb(35, 35, 35);" onclick="toggleDatatables()"><i  id="toggleIcon" class="fa fa-eye" style="padding-right:5px;"></i>Archive</a></h4>
+                                            <h5 class="text-start text-muted section-subheading" style="font-size: 15pt; display:flex; justify-content:space-between;">Add, Edit or Remove | Messages </h5>
+                                        </div>
+                                    </div>
+                                    
+                                    <hr style="margin-top:20px; margin-bottom:20px;">
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table id="datatable" class="table" style="width:100%">
+                                                <thead class="table-dark">
+                                                    <tr>
+                                                        <td>Name</td>
+                                                        <td>Email</td>
+                                                        <td>Phone</td>                                                        
+                                                        <td>Description</td>
+                                                        <td>Action</td>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </section>
                         
@@ -22,4 +49,8 @@
                 </div>
             </div>
         </div>
+
+        @include('dashboard.messages.ajax')
+        @include('dashboard.messages.modal')
+
 </x-app-layout>

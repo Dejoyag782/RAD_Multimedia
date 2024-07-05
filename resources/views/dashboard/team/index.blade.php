@@ -16,10 +16,13 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-12 text-center">
-                                        <h2 class="text-uppercase text-start section-heading">Team</h2>
-                                        <h3 class="text-start text-muted section-subheading" style="font-size: 15pt;">Add, Edit or Remove | Talent</h3>
+                                        <h4 class="text-uppercase text-start section-heading">Team</h4>
+                                        <h5 class="text-start text-muted section-subheading" style="font-size: 15pt;">Add, Edit or Remove | Talent</h5>
                                     </div>
                                 </div>
+                                
+                                <hr style="margin-top:20px; margin-bottom:20px;">
+
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="team-member"><img class="rounded-circle mx-auto" src="welcome_assets/img/team/318802872_3421445571510773_8389724998033089710_n.jpg">

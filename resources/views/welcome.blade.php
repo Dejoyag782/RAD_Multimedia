@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Home - Brand</title>
+    
     <meta name="description" content="RAD Clips Media offers a comprehensive suite of creative services including videography, video editing, photography, sound design, graphic design, and songwriting. Whether you're seeking stunning visuals, immersive soundscapes, or captivating designs, our talented team brings expertise and passion to every project. Elevate your brand with RAD Clips Media – where creativity meets craftsmanship.">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kaushan+Script">

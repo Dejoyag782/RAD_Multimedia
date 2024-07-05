@@ -1,30 +1,3 @@
-<style>
-     @media (max-width: 768px) {
-        .sidebar-lg {
-        display: none;
-        }
-        .sidebar-sm {
-        display: block;
-        z-index: 999;
-        }        
-        .view-cont{
-            max-width: 90% !important;
-        }
-    }
-    @media (min-width: 769px) {
-        .sidebar-lg {
-        display: block;
-        z-index: 999;
-        }
-        .sidebar-sm {
-        display: none;
-        }
-        .view-cont{
-            max-width: 100% !important;
-        }
-    }
-</style>
-
 {{-- Large Sidebar --}}
 <div class="col-md-6 flex-sm-grow-1 flex-sm-shrink-1 flex-md-grow-1 flex-md-shrink-1 sidebar-lg" style="color:#fec503; max-width: 13%; background: #25292d;padding-right: 0px;min-height: 700px;border-top-left-radius: 10px;border-bottom-left-radius: 10px;">
     <div class="row d-xxl-flex flex-sm-grow-1 flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-1 justify-content-xxl-center align-items-xxl-center" data-bss-hover-animate="pulse" style="background: #343a40;border-top-left-radius: 10px;min-height: 49.6px;border-top-width: 0.5px;border-top-style: ridge;border-bottom: 0.5px solid rgb(40,46,52) ;border-left-style: dotted;">

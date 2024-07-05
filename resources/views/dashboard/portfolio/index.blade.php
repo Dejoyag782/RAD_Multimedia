@@ -16,10 +16,13 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-12 text-center">
-                                        <h2 class="text-uppercase text-start section-heading">Portfolio</h2>
-                                        <h3 class="text-start text-muted section-subheading" style="font-size: 20px;">Add, Edit or Remove | Projects</h3>
+                                        <h4 class="text-uppercase text-start section-heading">Portfolio</h4>
+                                        <h5 class="text-start text-muted section-subheading" style="font-size: 20px;">Add, Edit or Remove | Projects</h5>
                                     </div>
                                 </div>
+                                
+                                <hr style="margin-top:20px; margin-bottom:20px;">
+
                                 <div class="row">
                                     <div class="col-sm-6 col-md-4 portfolio-item"><a class="portfolio-link" href="#portfolioModal1" data-bs-toggle="modal">
                                             <div class="portfolio-hover">

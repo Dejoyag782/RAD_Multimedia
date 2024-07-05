@@ -16,10 +16,13 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-12 text-center">
-                                        <h2 class="text-uppercase text-start section-heading">HISTORY</h2>
-                                        <h3 class="text-start text-muted section-subheading" style="font-size: 15pt;">Add, Edit or Remove | History</h3>
+                                        <h4 class="text-uppercase text-start section-heading">HISTORY</h4>
+                                        <h5 class="text-start text-muted section-subheading" style="font-size: 15pt;">Add, Edit or Remove | History</h5>
                                     </div>
                                 </div>
+                                
+                                <hr style="margin-top:20px; margin-bottom:20px;">
+
                                 <div class="row">
                                     <div class="col-lg-12 bg-dark" style="padding: 10px 10px 40px 10px;">
                                         <ul class="list-group timeline">

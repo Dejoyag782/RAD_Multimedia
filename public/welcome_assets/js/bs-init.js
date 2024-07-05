@@ -15,3 +15,63 @@ document.addEventListener('DOMContentLoaded', function() {
 		hoverAnimationEl.addEventListener('mouseleave', function(e){ e.target.classList.remove('animated', e.target.dataset.bssHoverAnimate) });
 	});
 }, false);
+
+
+function showNotification(message, isError = false) {
+	const notificationContent = $('#notificationContent');
+	const sidePanel = $('#sidePanel');
+	
+	// Create a new notification element
+	const notificationElement = $('<div></div>')
+		.addClass('notification')
+		.css({
+			'padding': '10px',
+			'margin-bottom': '10px',
+			'border': '1px solid',
+			'border-color': isError ? 'red' : 'green',
+			'background-color': isError ? '#f8d7da' : '#d4edda',
+			'color': isError ? '#721c24' : '#155724',
+			'position': 'relative'
+		})
+		.text(message);
+
+	// Create a close button
+	const closeButton = $('<span></span>')
+		.css({
+			'position': 'absolute',
+			'top': '5px',
+			'right': '10px',
+			'cursor': 'pointer',
+			'font-weight': 'bold'
+		})
+		.text('x')
+		.click(function () {
+			notificationElement.fadeOut('slow', function () {
+				$(this).remove();
+				// Hide the side panel if no notifications are left
+				if (notificationContent.children().length === 0) {
+					sidePanel.hide();
+				}
+			});
+		});
+
+	// Add the close button to the notification element
+	notificationElement.append(closeButton);
+
+	// Add the notification to the side panel
+	notificationContent.append(notificationElement);
+
+	// Show the side panel
+	sidePanel.show();
+
+	// Automatically hide the notification after 5 seconds
+	setTimeout(function () {
+		notificationElement.fadeOut('slow', function () {
+			$(this).remove();
+			// Hide the side panel if no notifications are left
+			if (notificationContent.children().length === 0) {
+				sidePanel.hide();
+			}
+		});
+	}, 5000);
+}

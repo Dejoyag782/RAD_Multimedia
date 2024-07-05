@@ -25,7 +25,7 @@
         <link rel="stylesheet" href="{{asset('welcome_assets/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('welcome_assets/css/Highlight-Blue.css')}}">
         <link rel="stylesheet" href="{{asset('welcome_assets/css/Login-Form-Dark.css')}}">
-        <link rel="stylesheet" href="{{asset('welcome_assets/css/untitled.css')}}">
+        <link rel="stylesheet" href="{{asset('welcome_assets/css/bootstrap_modified.css')}}">
         <link rel="stylesheet" href="{{asset('welcome_assets/css/Article-List.min.css')}}">
 
         <script src="{{asset('welcome_assets/js/app.js')}}"></script>
@@ -40,6 +40,7 @@
     <body class="font-poppins antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900"  style="max-width: 100%;min-width: 100%;min-height: 750px; padding-bottom: 100px; max-height: 100%;background: url(&quot;welcome_assets/img/giphy.gif&quot;) no-repeat, #ffffff;background-size: cover, auto;">
             @include('layouts.navigation')
+            @include('components.response')
 
             <!-- Page Heading -->
             @isset($header)

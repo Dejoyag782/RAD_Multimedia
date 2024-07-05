@@ -1,0 +1,51 @@
+.bg-light {
+  --bs-bg-opacity: 0 !important;
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
+/* Modal Modifications */
+.btn-close{
+  background-color:#fed136 !important;
+  border-radius: 10% !important;
+}
+
+/* Datatables Modifications */
+.dataTables_paginate{
+    display: flex !important;
+    justify-content: end !important;
+}
+.dataTables_filter{
+  display: flex !important;
+  justify-content: end !important;
+}
+.dataTables_empty{
+  text-align: center !important;
+}
+
+/* Sidebar Modifications */
+@media (max-width: 768px) {
+  .sidebar-lg {
+  display: none;
+  }
+  .sidebar-sm {
+  display: block;
+  z-index: 999;
+  }        
+  .view-cont{
+      max-width: 90% !important;
+  }
+}
+@media (min-width: 769px) {
+  .sidebar-lg {
+  display: block;
+  z-index: 999;
+  }
+  .sidebar-sm {
+  display: none;
+  }
+  .view-cont{
+      max-width: 100% !important;
+  }
+}
+
+

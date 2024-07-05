@@ -35,7 +35,7 @@
                                     </div>
                                     <div class="col-md-3"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span>
                                         <h4 class="section-heading">MESSAGES</h4>
-                                        <p class="text-muted">5<br></p>
+                                        <p class="text-muted">{{ $archivedMessagesCount }}<br></p>
                                     </div>
                                 </div>
                             </div>
