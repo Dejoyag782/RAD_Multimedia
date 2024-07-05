@@ -13,6 +13,7 @@ class MessageController extends Controller
         return view('dashboard.messages.index');
     }
 
+
     public function getMessages(Request $request){
       
         // Page Length

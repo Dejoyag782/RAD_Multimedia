@@ -248,19 +248,33 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <form id="contactForm" name="contactForm" novalidate="novalidate">
+                    <form id="contactForm" name="contactForm" method="POST" action="{{ route('message.store') }}" novalidate="novalidate">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-group mb-3"><input class="form-control" type="text" id="name" placeholder="Your Name *" required=""><small class="form-text text-danger flex-grow-1 help-block lead"></small></div>
-                                <div class="form-group mb-3"><input class="form-control" type="email" id="email" placeholder="Your Email *" required=""><small class="form-text text-danger help-block lead"></small></div>
-                                <div class="form-group mb-3"><input class="form-control" type="tel" placeholder="Your Phone *" required=""><small class="form-text text-danger help-block lead"></small></div>
+                                <div class="form-group mb-3">
+                                    <input class="form-control" type="text" id="name" name="name" placeholder="Your Name *" required="">
+                                    <small class="form-text text-danger flex-grow-1 help-block lead"></small>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input class="form-control" type="email" id="email" name="email" placeholder="Your Email *" required="">
+                                    <small class="form-text text-danger help-block lead"></small>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <input class="form-control" type="tel" id="phone" name="phone" placeholder="Your Phone *" required="">
+                                    <small class="form-text text-danger help-block lead"></small>
+                                </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="form-group mb-3"><textarea class="form-control" id="message" placeholder="Your Message *" required=""></textarea><small class="form-text text-danger help-block lead"></small></div>
+                                <div class="form-group mb-3">
+                                    <textarea class="form-control" id="desc" name="desc" placeholder="Your Message *" required=""></textarea>
+                                    <small class="form-text text-danger help-block lead"></small>
+                                </div>
                             </div>
                             <div class="w-100"></div>
                             <div class="col-lg-12 text-center">
-                                <div id="success"></div><button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit">Send Message</button>
+                                <div id="success"></div>
+                                <button class="btn btn-primary btn-xl text-uppercase" id="sendMessageButton" type="submit">Send Message</button>
                             </div>
                         </div>
                     </form>

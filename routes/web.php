@@ -4,11 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\DashController;
- 
+use App\Http\Controllers\WelcomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -54,6 +51,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 
+
+    Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+    Route::post('/message/store', [WelcomeController::class, 'store'])->name('message.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
