@@ -79,10 +79,14 @@
 
         // Archive Button Icon Changer
         function updateIcon() {
-            const icon = $('#toggleIcon');
+            const icon = $('#toggleIcon');            
+            const archiveToggler = $('#toggleDatatables');
+
             if (isArchived) {
+                archiveToggler.removeClass('btn-warning').addClass('btn-secondary');
                 icon.removeClass('fa-eye').addClass('fa-eye-slash');
             } else {
+                archiveToggler.removeClass('btn-secondary').addClass('btn-warning');
                 icon.removeClass('fa-eye-slash').addClass('fa-eye');
             }
         }
