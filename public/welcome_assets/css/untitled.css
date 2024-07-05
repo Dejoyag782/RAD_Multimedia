@@ -1,0 +1,5 @@
+.bg-light {
+  --bs-bg-opacity: 0 !important;
+  background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
+}
+
