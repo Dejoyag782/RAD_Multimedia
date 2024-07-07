@@ -78,17 +78,23 @@ function showNotification(message, isError = false) {
 
 // Profile Pciture Edit
 function displaySelectedImage(event, elementId) {
-    const selectedImage = document.getElementById(elementId);
+    const selectedDiv = document.getElementById(elementId);
     const fileInput = event.target;
 
     if (fileInput.files && fileInput.files[0]) {
         const reader = new FileReader();
 
         reader.onload = function(e) {
-            selectedImage.src = e.target.result;
+            selectedDiv.style.backgroundImage = `url(${e.target.result})`;
+            selectedDiv.style.backgroundSize = 'cover';  // Optionally, set the background size
+            selectedDiv.style.backgroundPosition = 'center';  // Optionally, set the background position
         };
 
         reader.readAsDataURL(fileInput.files[0]);
     }
 }
+
+
+// Image Cropper
+
 

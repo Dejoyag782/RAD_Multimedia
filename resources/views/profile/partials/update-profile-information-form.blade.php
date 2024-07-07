@@ -20,20 +20,27 @@
         <div>
             <x-input-label for="profile_pic" :value="__('Profile Photo')" />
             <div>
-                <div class="mb-4 d-flex justify-content-left" style="display: flex; justify-content:left !important;">
-                    <img id="selectedImage" class="rounded-circle mx-auto"
+                <div class="mb-4 d-flex justify-content-left" style="display: flex; justify-content:left !important; max-height: 200px!important; min-width:200px!important; max-width:250px!important; ">
+                    <div id="selectedImage" class="rounded-circle mx-auto" style="background-image: url({{ $user->profile_pic ? asset('storage/' . $user->profile_pic) : 'https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg' }});
+                    no-repeat, #ffffff;background-size: cover, auto;
+                    min-height: 200px!important; min-width:200px!important; max-width:250px!important; max-height:250px!important;">
+                    </div>
+                    {{-- <img id="selectedImage" class="rounded-circle mx-auto"
                     style="min-height: 200px!important; min-width:200px!important; max-width:250px!important; max-height:250px!important;"
                     src="{{ $user->profile_pic ? asset('storage/' . $user->profile_pic) : 'https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg' }}"
-                    alt="example placeholder" />
+                    alt="example placeholder" /> --}}
                 </div>
                 <div class="d-flex justify-content-right">
                     <div data-mdb-ripple-init class="btn btn-primary btn-rounded" >
                         <label class="form-label text-white m-1" for="customFile1">Choose Photo</label>
-                        <input type="file" name="profile_pic" class="form-control d-none" id="customFile1" onchange="displaySelectedImage(event, 'selectedImage')" />
+                        <input type="file" name="profile_pic" class="form-control d-none"
+                        type='file' accept=".png, .jpg, .jpeg," id="customFile1" onchange="displaySelectedImage(event, 'selectedImage')" />
                     </div>
                 </div>
             </div>
             <x-input-error class="mt-2" :messages="$errors->get('profile_pic')" />
+
+                {{-- @include('profile.partials.crop-image-modal') --}}
         </div>
     
         <div>
@@ -82,3 +89,6 @@
     </form>
     
 </section>
+
+
+

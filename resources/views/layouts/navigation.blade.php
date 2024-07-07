@@ -41,8 +41,13 @@
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                                 </svg>
                             </div> --}}
-                            <img style="border-radius: 100%;border-style: none;min-width: auto;min-height: 30px;max-height: 50px;max-width: auto;" 
+                            <div class="rounded-circle mx-auto" style="background-image: url({{ Auth::user()->profile_pic ? asset('storage/' . Auth::user()->profile_pic) : 'https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg' }});
+                                no-repeat, #ffffff;background-size: cover, auto;
+                                min-height: 50px!important; min-width:50px!important; max-width:70px!important; max-height:70px!important;">
+                                </div>
+                            {{-- <img style="border-radius: 100%;border-style: none;min-width: auto;min-height: 30px;max-height: 50px;max-width: auto;" 
                             src="{{ Auth::user()->profile_pic ? asset('storage/' . Auth::user()->profile_pic) : 'https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg' }}">
+                             --}}
                         </button>                        
                     </x-slot>
 
