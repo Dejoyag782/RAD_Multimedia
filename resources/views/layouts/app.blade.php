@@ -19,6 +19,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide&amp;display=swap">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+        <!-- Cropper.js CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet"/>
         <link rel="stylesheet" href="{{asset('welcome_assets/fonts/font-awesome.min.css')}}">    
         <link rel="stylesheet" href="{{asset('welcome_assets/fonts/ionicons.min.css')}}">
         <link rel="stylesheet" href="{{asset('welcome_assets/css/app.css')}}">
@@ -28,6 +30,8 @@
         <link rel="stylesheet" href="{{asset('welcome_assets/css/bootstrap_modified.css')}}">
         <link rel="stylesheet" href="{{asset('welcome_assets/css/Article-List.min.css')}}">
 
+        <!-- Cropper.js JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
         <script src="{{asset('welcome_assets/js/app.js')}}"></script>
         <script src="{{asset('welcome_assets/js/agency.js')}}"></script>
         <script src="{{asset('welcome_assets/js/bootstrap.js')}}"></script>

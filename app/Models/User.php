@@ -20,6 +20,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_pic',
     ];
 
     /**
@@ -44,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function deleteOldProfilePicture()
+    {
+        if ($this->profile_pic) {
+            Storage::disk('public')->delete($this->profile_pic);
+        }
+    }
+
 }

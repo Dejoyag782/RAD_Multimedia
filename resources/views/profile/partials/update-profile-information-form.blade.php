@@ -13,31 +13,50 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
-
+    
+        <div>
+            <x-input-label for="profile_pic" :value="__('Profile Photo')" />
+            <div>
+                <div class="mb-4 d-flex justify-content-left" style="display: flex; justify-content:left !important;">
+                    <img id="selectedImage" class="rounded-circle mx-auto"
+                    style="min-height: 200px!important; min-width:200px!important; max-width:250px!important; max-height:250px!important;"
+                    src="{{ $user->profile_pic ? asset('storage/' . $user->profile_pic) : 'https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg' }}"
+                    alt="example placeholder" />
+                </div>
+                <div class="d-flex justify-content-right">
+                    <div data-mdb-ripple-init class="btn btn-primary btn-rounded" >
+                        <label class="form-label text-white m-1" for="customFile1">Choose Photo</label>
+                        <input type="file" name="profile_pic" class="form-control d-none" id="customFile1" onchange="displaySelectedImage(event, 'selectedImage')" />
+                    </div>
+                </div>
+            </div>
+            <x-input-error class="mt-2" :messages="$errors->get('profile_pic')" />
+        </div>
+    
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
-
+    
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
+    
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800 dark:text-gray-200">
                         {{ __('Your email address is unverified.') }}
-
+    
                         <button form="send-verification" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
                             {{ __('Click here to re-send the verification email.') }}
                         </button>
                     </p>
-
+    
                     @if (session('status') === 'verification-link-sent')
                         <p class="mt-2 font-medium text-sm text-green-600 dark:text-green-400">
                             {{ __('A new verification link has been sent to your email address.') }}
@@ -46,10 +65,10 @@
                 </div>
             @endif
         </div>
-
+    
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>
-
+    
             @if (session('status') === 'profile-updated')
                 <p
                     x-data="{ show: true }"
@@ -61,4 +80,5 @@
             @endif
         </div>
     </form>
+    
 </section>

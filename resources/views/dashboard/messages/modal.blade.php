@@ -13,8 +13,8 @@
             <hr style="margin-top:20px; margin-bottom:20px;">
 
             <p><b>Contact:</b></p>
-            <p><i class="fa fa-envelope" style="padding-right:10px;"></i><span id="email"></span></p>
-            <p><i class="fa fa-mobile" style="font-size: 20pt; padding-right:10px;"></i><span id="phone"></span></p>
+            <p><i class="fa fa-envelope" style="padding-right:10px;"></i><b>-</b> <span id="email"></span></p>
+            <p><i class="fa fa-mobile" style="font-size: 20pt; padding-right:10px;"></i><b>-</b> <span id="phone"></span></p>
              
             <hr style="margin-top:20px; margin-bottom:20px;">
             

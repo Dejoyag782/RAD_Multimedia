@@ -6,6 +6,8 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -26,16 +28,44 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+        
+        // Capture the old profile picture path before updating the user's profile
+        $oldProfilePicPath = $user->profile_pic;
+        
+        $user->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        // Handle profile picture upload and deletion
+        if ($request->hasFile('profile_pic')) {
+            // Store new profile picture
+            $file = $request->file('profile_pic');
+            $newProfilePicPath = $file->store('profile_pics', 'public');
+            $user->profile_pic = $newProfilePicPath;
+
+            // Delete old profile picture if it exists
+            if ($oldProfilePicPath) {
+                // Check if the old filename exists in storage and delete it
+                if (Storage::disk('public')->exists($oldProfilePicPath)) {
+                    Storage::disk('public')->delete($oldProfilePicPath);
+
+                    // Log successful deletion
+                    Log::info("Deleted old profile picture: {$oldProfilePicPath}");
+                } else {
+                    // Log if file doesn't exist
+                    Log::warning("Old profile picture not found in storage: {$oldProfilePicPath}");
+                }
+            }
+        }
+
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+
 
     /**
      * Delete the user's account.
