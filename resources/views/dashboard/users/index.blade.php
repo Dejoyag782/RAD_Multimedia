@@ -15,6 +15,36 @@
                         <section id="users" style="padding-top: 10px;">
                             <div class="container">
                                 
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-lg-12 text-center">
+                                            <h4 class="text-uppercase text-start section-heading d-flex justify-content-between">Users 
+                                                <a class="btn" style="background-color:#212529; color: rgb(249, 242, 242);" data-toggle="modal" data-target="#addUserModal">
+                                                    <i id="toggleIcon" class="fa fa-user" style="padding-right:5px;"></i>Add User
+                                                </a>
+                                                </h4>
+                                            <h5 class="text-start text-muted section-subheading" style="font-size: 15pt; display:flex; justify-content:space-between;">Manage | Users </h5>
+                                        </div>
+                                    </div>
+                                    
+                                    <hr style="margin-top:20px; margin-bottom:20px;">
+
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <table id="users_datatable" class="table" style="width:100%">
+                                                <thead class="table-dark">
+                                                    <tr>                                                        
+                                                        <td></td> 
+                                                        <td>Name</td>
+                                                        <td>Email</td>
+                                                        <td>Action</td>
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </section>
                         
@@ -22,4 +52,9 @@
                 </div>
             </div>
         </div>
+
+        @include('dashboard.users.ajax')
+        @include('dashboard.users.modal')
+        @include('dashboard.users.add-user-modal')
+
 </x-app-layout>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\DashController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\UserController;
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -32,21 +33,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard.team.index');
     })->name('team');
 
-    Route::get('/messages', function () {
-        return view('dashboard.messages.index');
-    })->name('messages');
+    // Route::get('/messages', function () {
+    //     return view('dashboard.messages.index');
+    // })->name('messages');
 
-    Route::get('/users', function () {
-        return view('dashboard.users.index');
-    })->name('users');
+    // Route::get('/users', function () {
+    //     return view('dashboard.users.index');
+    // })->name('users');
 
-    
+    // Messages Route
     Route::get('/messages', [MessageController::class, 'index'])->name('messages');
     Route::post('/get-messages', [MessageController::class, 'getMessages'])->name('getMessages');    
     Route::post('/get-archived-messages', [MessageController::class, 'getArchivedMessages'])->name('getArchivedMessages');
     Route::post('/archive-message', [MessageController::class, 'archiveMessage'])->name('archiveMessage');    
     Route::post('/delete-message', [MessageController::class, 'deleteMessage'])->name('deleteMessage');
     Route::get('/messages/{id}', [MessageController::class, 'showMessage']);
+
+    // Users Route 
+    Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
+    Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::post('/get-users', [UserController::class, 'getUsers'])->name('getUsers');    
+    Route::post('/delete-user', [UserController::class, 'deleteUser'])->name('deleteUser');
+    Route::get('/users/{id}', [UserController::class, 'showUser']);
 
 
 });

@@ -19,7 +19,7 @@
                                     <div class="row">
                                         <div class="col-lg-12 text-center">
                                             <h4 class="text-uppercase text-start section-heading d-flex justify-content-between">Messages <a class="btn btn-warning" id="toggleDatatables" style=" color: rgb(35, 35, 35);" onclick="toggleDatatables()"><i  id="toggleIcon" class="fa fa-eye" style="padding-right:5px;"></i>Archive</a></h4>
-                                            <h5 id="toggleHeader" class="text-start text-muted section-subheading" style="font-size: 15pt; display:flex; justify-content:space-between;">Review, Archive or Remove | Messages </h5>
+                                            <h5 id="toggleHeader_messages" class="text-start text-muted section-subheading" style="font-size: 15pt; display:flex; justify-content:space-between;">Review, Archive or Remove | Messages </h5>
                                         </div>
                                     </div>
                                     

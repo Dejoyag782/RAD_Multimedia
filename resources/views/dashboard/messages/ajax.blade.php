@@ -93,7 +93,7 @@
 
         // Header Name Toggler
         function updateHeader() {
-            const header = $('#toggleHeader');
+            const header = $('#toggleHeader_messages');
             if (isArchived) {
                 header.text('Review or Remove | Archived Messages ');
             } else {

@@ -80,6 +80,23 @@ class ProfileController extends Controller
 
         Auth::logout();
 
+        // Capture the old profile picture path before updating the user's profile
+        $ProfilePicPath = $user->profile_pic;
+
+        // Delete old profile picture if it exists
+        if ($ProfilePicPath) {
+            // Check if the old filename exists in storage and delete it
+            if (Storage::disk('public')->exists($ProfilePicPath)) {
+                Storage::disk('public')->delete($ProfilePicPath);
+
+                // Log successful deletion
+                Log::info("Deleted old profile picture: {$ProfilePicPath}");
+            } else {
+                // Log if file doesn't exist
+                Log::warning("Old profile picture not found in storage: {$ProfilePicPath}");
+            }
+        }
+
         $user->delete();
 
         $request->session()->invalidate();
