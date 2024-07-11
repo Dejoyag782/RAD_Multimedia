@@ -15,17 +15,19 @@ RAD Clips Media's website with an admin dashboard that empowers administrators t
 
 Run these commands for the installation of the project:
 
-- composer update
+1st - composer update
 
-- npm install
+2nd - npm install
 
-- cp .env.example .env
+3rd - cp .env.example .env
 
-- php artisan migrate
+4th - php artisan migrate
 
-- php artisan db:seed
+5th - php artisan db:seed
 
-- php artisan key:generate
+6th - php artisan key:generate
+
+7th - php artisan storage:link
 
 Run these commands for serving the project:
 
