@@ -27,6 +27,8 @@ Run these commands for the installation of the project:
 
 6th - php artisan key:generate
 
+7th - php artisan storage:link
+
 Run these commands for serving the project:
 
 - php artisan serve
