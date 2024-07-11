@@ -1,6 +1,6 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="50px" height="70px" viewBox="0 0 470.248 400" enable-background="new 0 0 470.248 400" xml:space="preserve">
+	 width="470.248px" height="400px" viewBox="0 0 470.248 400" enable-background="new 0 0 470.248 400" xml:space="preserve">
 <g>
 	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="6.2168" y1="212.4717" x2="218.8042" y2="212.4717">
 		<stop  offset="0" style="stop-color:#FFF33B"/>
