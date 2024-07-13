@@ -62,7 +62,7 @@
                     data: null,
                     render: function (data, type, row) {
                             return '<button type="button" class="btn btn-secondary view-user-btn" data-bs-toggle="modal" data-id="' + row.id + '" data-bs-target="#userModal"><i class="fa fa-eye"></i></button>' + 
-                            '<button style="margin-left:5px;" class="btn btn-danger delete-btn" data-id="' + row.id + '"><i class="fa fa-trash"></i></button>';
+                            '<button style="margin-left:5px;" class="btn btn-danger delete-btn" data-id="' + row.id + '" data-name="' + row.name + '"><i class="fa fa-trash"></i></button>';
                         },
                     orderable: false
                 }
@@ -91,7 +91,7 @@
                     $('#userModal #id').val(response.id);
                     $('#userModal #name').text(response.name);
                     $('#userModal #email').text(response.email);
-                    $('#userModal #user_type').val(response.user_type);
+                    $('#userModal #edit_user_type').val(response.user_type);
                     // Assuming response.profile_pic contains the URL of the profile picture
                     var profilePicUrl = response.profile_pic ? response.profile_pic : 'https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg';
                     // Set the background image of the profile_pic div
@@ -104,24 +104,42 @@
             });
         });
 
-        // Delete Button
+        // Delete Button using sweet alerts
         $('#users_datatable').on('click', '.delete-btn', function() {
             var id = $(this).data('id');
-            $.ajax({
-                    url: "{{ route('deleteUser') }}",
-                    type: "POST",
-                    data: { id: id },
-                    success: function(response) {
-                        // alert(response.success);
-                        showNotification(response.success);
-                        $('#users_datatable').DataTable().ajax.reload();
-                    },
-                    error: function(response) {
-                        // alert(response.responseJSON.error);
-                        showNotification(response.responseJSON.error);
-                    }
-                });
+            var name = $(this).data('name'); // This should now return the correct name
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: `Are you sure to remove "${name}"?`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "{{ route('deleteUser') }}",
+                        type: "POST",
+                        data: { id: id },
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            showNotification(response.success);
+                            $('#users_datatable').DataTable().ajax.reload();
+                        },
+                        error: function(response) {
+                            showNotification(response.responseJSON.error);
+                        }
+                    });
+                }
+            });
         });
+
+
 
         // -----------------------------------------------------------end view/delete/archive-----------------------------------------//
 

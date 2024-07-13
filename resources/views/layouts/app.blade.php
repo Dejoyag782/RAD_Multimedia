@@ -23,23 +23,20 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet"/>
         <link rel="stylesheet" href="{{asset('welcome_assets/fonts/font-awesome.min.css')}}">    
         <link rel="stylesheet" href="{{asset('welcome_assets/fonts/ionicons.min.css')}}">
-        <link rel="stylesheet" href="{{asset('welcome_assets/css/app.css')}}">
         <link rel="stylesheet" href="{{asset('welcome_assets/css/bootstrap.min.css')}}">
         <link rel="stylesheet" href="{{asset('welcome_assets/css/Highlight-Blue.css')}}">
         <link rel="stylesheet" href="{{asset('welcome_assets/css/Login-Form-Dark.css')}}">
         <link rel="stylesheet" href="{{asset('welcome_assets/css/bootstrap_modified.css')}}">
-        <link rel="stylesheet" href="{{asset('welcome_assets/css/Article-List.min.css')}}">
+        <link rel="stylesheet" href="{{asset('welcome_assets/css/Article-List.css')}}">
 
-        <!-- Cropper.js JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
-        <script src="{{asset('welcome_assets/js/app.js')}}"></script>
+         <!-- Scripts -->
         <script src="{{asset('welcome_assets/js/agency.js')}}"></script>
         <script src="{{asset('welcome_assets/js/bootstrap.js')}}"></script>
         <script src="{{asset('welcome_assets/js/bootstrap.min.js')}}"></script>
         <script src="{{asset('welcome_assets/js/bs-init.js')}}"></script>
-
-        <!-- Scripts -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Sweet Alert.js JS -->       
         @vite(['resources/css/app.css', 'resources/js/app.js',])
+        
     </head>
     <body class="font-poppins antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900"  style="max-width: 100%;min-width: 100%;min-height: 750px; padding-bottom: 100px; max-height: 100%;background: url(&quot;welcome_assets/img/giphy.gif&quot;) no-repeat, #ffffff;background-size: cover, auto;">

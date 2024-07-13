@@ -17,8 +17,8 @@
             
               <input type="hidden" name="id" id="id">
               <div class="form-group">
-                <label for="user_type">User Type</label>
-                <select class="form-select" name="user_type" id="user_type">
+                <label for="edit_user_type">User Type</label>
+                <select class="form-select" name="user_type" id="edit_user_type">
                   <option value="mod">Moderator</option>
                   <option value="ad">Admin</option>                  
                 </select>
