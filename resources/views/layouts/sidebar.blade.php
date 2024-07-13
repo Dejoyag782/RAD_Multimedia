@@ -1,6 +1,7 @@
 {{-- Large Sidebar --}}
 <div class="col-md-6 flex-sm-grow-1 flex-sm-shrink-1 flex-md-grow-1 flex-md-shrink-1 sidebar-lg" style="color:#fec503; max-width: 13%; background: #25292d;padding-right: 0px;min-height: 700px;border-top-left-radius: 10px;border-bottom-left-radius: 10px;">
-    <div class="row d-xxl-flex flex-sm-grow-1 flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-1 justify-content-xxl-center align-items-xxl-center" data-bss-hover-animate="pulse" style="background: #343a40;border-top-left-radius: 10px;min-height: 49.6px;border-top-width: 0.5px;border-top-style: ridge;border-bottom: 0.5px solid rgb(40,46,52) ;border-left-style: dotted;">
+<?php $page = Request::segment(1); ?>
+<div class="row d-xxl-flex flex-sm-grow-1 flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-1 justify-content-xxl-center align-items-xxl-center" data-bss-hover-animate="pulse" style="background: #343a40;border-top-left-radius: 10px;min-height: 49.6px;border-top-width: 0.5px;border-top-style: ridge;border-bottom: 0.5px solid rgb(40,46,52) ;border-left-style: dotted;">
         <div class="col d-xxl-flex justify-content-xxl-start align-items-xxl-center" style="padding-right: 0px;min-height: 49.6px;">
             <a class="navbar-brand text-center d-xl-flex d-xxl-flex align-items-baseline justify-content-xl-start align-items-xl-center align-items-xxl-end"  href="{{route('dashboard')}}" style="font-family: Poppins, sans-serif;border-radius: 0;border-style: none;margin-bottom: 5px;margin-top: 5px;min-width: 100%;">
                 <i class="fa fa-dashboard">
@@ -56,6 +57,7 @@
             </a>
         </div>
     </div>
+    @if (auth()->user()->user_type === 'ad')
     <div class="row d-xxl-flex flex-sm-grow-1 flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-1 justify-content-xxl-center align-items-xxl-center" data-bss-hover-animate="pulse" style="background: #343a40;min-height: 49.6px;border-top-width: 0.5px;border-top-style: ridge;border-bottom: 0.5px solid rgb(40,46,52) ;border-left-style: dotted;">
         <div class="col d-xxl-flex justify-content-xxl-start align-items-xxl-center" style="min-height: 49.6px;">
             <a class="navbar-brand text-center d-xl-flex d-xxl-flex align-items-baseline justify-content-xl-start align-items-xl-center align-items-xxl-end"  href="{{route('users')}}" style="font-family: Poppins, sans-serif;border-radius: 0;border-style: none;margin-bottom: 5px;margin-top: 5px;min-width: 100%;">
@@ -65,6 +67,7 @@
             </a>
         </div>
     </div>
+    @endif
 </div>
 
 {{-- Small Sidebar --}}
@@ -114,6 +117,7 @@
             </a>
         </div>
     </div>
+    @if (auth()->user()->user_type === 'ad')
     <div class="row d-xxl-flex flex-sm-grow-1 flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-1 justify-content-xxl-center align-items-xxl-center" data-bss-hover-animate="pulse" style="background: #343a40;min-height: 49.6px;border-top-width: 0.5px;border-top-style: ridge;border-bottom: 0.5px solid rgb(40,46,52) ;border-left-style: dotted;">
         <div class="col d-xxl-flex justify-content-xxl-start align-items-xxl-center" style="min-height: 49.6px;">
             <a class="navbar-brand text-center d-xl-flex d-xxl-flex align-items-baseline justify-content-xl-start align-items-xl-center justify-content-xxl-center align-items-xxl-end"  href="{{route('users')}}" style="font-family: Poppins, sans-serif;border-radius: 0;border-style: none;margin-bottom: 5px;margin-top: 5px;min-width: 100%;">
@@ -121,4 +125,5 @@
             </a>
         </div>
     </div>
+    @endif
 </div>

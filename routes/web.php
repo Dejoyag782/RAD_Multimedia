@@ -6,7 +6,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\DashController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
-
+use App\Http\Middleware\CheckAdminRole;
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -49,6 +49,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/delete-message', [MessageController::class, 'deleteMessage'])->name('deleteMessage');
     Route::get('/messages/{id}', [MessageController::class, 'showMessage']);
 
+    
+
+
+
+
+});
+
+Route::middleware(['auth','isAdmin'])->group(function () {
+    // Routes that only admins can access
     // Users Route 
     Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
     Route::get('/users', [UserController::class, 'index'])->name('users');
@@ -57,10 +66,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route::get('/users/{id}', [UserController::class, 'showUser']);
     Route::get('/users/{id}', [UserController::class, 'showUser'])->name('users.show');
     Route::post('/users/update/{id}', [UserController::class, 'updateUser'])->name('users.update');
-
-
-
-
 });
 
 
