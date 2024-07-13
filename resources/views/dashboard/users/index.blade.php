@@ -37,6 +37,7 @@
                                                         <td></td> 
                                                         <td>Name</td>
                                                         <td>Email</td>
+                                                        <td>Role</td>
                                                         <td>Action</td>
                                                     </tr>
                                                 </thead>

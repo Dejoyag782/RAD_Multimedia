@@ -54,7 +54,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/users', [UserController::class, 'index'])->name('users');
     Route::post('/get-users', [UserController::class, 'getUsers'])->name('getUsers');    
     Route::post('/delete-user', [UserController::class, 'deleteUser'])->name('deleteUser');
-    Route::get('/users/{id}', [UserController::class, 'showUser']);
+    // Route::get('/users/{id}', [UserController::class, 'showUser']);
+    Route::get('/users/{id}', [UserController::class, 'showUser'])->name('users.show');
+    Route::post('/users/update/{id}', [UserController::class, 'updateUser'])->name('users.update');
+
+
 
 
 });

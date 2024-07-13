@@ -21,6 +21,13 @@
                 <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
+            <div class="form-group">
+                <label for="user_type">User Type</label>
+                <select class="form-select" name="user_type" id="user_type">
+                  <option value="mod">Moderator</option>
+                  <option value="ad">Admin</option>                  
+                </select>
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

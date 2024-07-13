@@ -27,11 +27,11 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'user_type' => $request->user_type,
         ]);
 
         return redirect()->route('users')->with('success', 'User added successfully.');
     }
-
 
     public function getUsers(Request $request)
     {
@@ -45,7 +45,7 @@ class UserController extends Controller
         $orderBy = $request->order[0]['dir'] ?? 'desc';
 
         // get data from users table
-        $query = \DB::table('users')->select(['id', 'name', 'email', 'email_verified_at', 'password', 'profile_pic']);
+        $query = \DB::table('users')->select(['id', 'name', 'email', 'user_type', 'email_verified_at', 'password', 'profile_pic']);
 
         // Search
         $search = $request->search;
@@ -65,15 +65,6 @@ class UserController extends Controller
             case '2':
                 $orderByName = 'email';
                 break;
-            case '3':
-                $orderByName = 'email_verified_at';
-                break;
-            case '4':
-                $orderByName = 'password';
-                break;
-            case '5':
-                $orderByName = 'profile_pic';
-                break;
         }
         $query = $query->orderBy($orderByName, $orderBy);
         $recordsFiltered = $recordsTotal = $query->count();
@@ -81,6 +72,26 @@ class UserController extends Controller
 
         return response()->json(["draw" => $request->draw, "recordsTotal" => $recordsTotal, "recordsFiltered" => $recordsFiltered, 'data' => $users], 200);
     }
+
+
+    public function updateUser(Request $request, $id)
+    {
+        $user = User::find($id);
+    
+        if (!$user) {
+            return redirect()->route('users')->with('message', 'User update failed.');
+        }
+    
+        $request->validate([
+            'user_type' => 'string'
+        ]);
+    
+        $user->user_type = $request->input('user_type');
+        $user->save();
+    
+        return redirect()->route('users')->with('message', 'User updated successfully.');
+    }
+    
 
 
     public function deleteUser(Request $request)

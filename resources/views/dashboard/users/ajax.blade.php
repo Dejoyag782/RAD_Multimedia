@@ -47,9 +47,21 @@
                     data: 'email',
                 },
                 {
+                    data: 'user_type',
+                    render: function(data) {
+                        if (data === 'ad') {
+                            return 'Admin';
+                        } else if (data === 'mod') {
+                            return 'Moderator';
+                        } else {
+                            return ''; // Handle unexpected cases
+                        }
+                    }
+                },
+                {
                     data: null,
                     render: function (data, type, row) {
-                            return '<button type="button" class="btn btn-secondary view-message-btn" data-bs-toggle="modal" data-id="' + row.id + '" data-bs-target="#messageModal"><i class="fa fa-eye"></i></button>' + 
+                            return '<button type="button" class="btn btn-secondary view-user-btn" data-bs-toggle="modal" data-id="' + row.id + '" data-bs-target="#userModal"><i class="fa fa-eye"></i></button>' + 
                             '<button style="margin-left:5px;" class="btn btn-danger delete-btn" data-id="' + row.id + '"><i class="fa fa-trash"></i></button>';
                         },
                     orderable: false
@@ -65,8 +77,8 @@
 
         // -----------------------------------------------------------start view/delete/archive-----------------------------------------//
 
-        // View Message Details
-        $('#users_datatable').on('click', '.view-message-btn', function() {
+        // View Users Details
+        $('#users_datatable').on('click', '.view-user-btn', function() {
             var id = $(this).data('id');
 
             // Fetch data using AJAX
@@ -75,17 +87,19 @@
                 type: 'GET',
                 success: function(response) {
                     // Populate modal fields
-                    $('#messageModal #id').val(response.id);
-                    $('#messageModal #name').text(response.name);
-                    $('#messageModal #email').text(response.email);
+                    $('#editUserForm').attr('action', '/users/update/' + response.id); // Set form action dynamically
+                    $('#userModal #id').val(response.id);
+                    $('#userModal #name').text(response.name);
+                    $('#userModal #email').text(response.email);
+                    $('#userModal #user_type').val(response.user_type);
                     // Assuming response.profile_pic contains the URL of the profile picture
                     var profilePicUrl = response.profile_pic ? response.profile_pic : 'https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg';
                     // Set the background image of the profile_pic div
-                    $('#messageModal #profile_pic').css('background-image', `url(storage/${profilePicUrl})`);
+                    $('#userModal #profile_pic').css('background-image', `url(storage/${profilePicUrl})`);
                 },
                 error: function(response) {
-                    // alert('Error fetching message details.');
-                    showNotification('Error fetching message details.');
+                    // alert('Error fetching user details.');
+                    showNotification('Error fetching user details.');
                 }
             });
         });
@@ -127,6 +141,7 @@
                     $('#addUserModal').modal('hide');
                     $('#addUserForm')[0].reset();
                     // Optionally, refresh your datatable here
+                    showNotification(response.success);
                     $('#user_datatable').DataTable().ajax.reload();
                     alert('User added successfully');
                 },
@@ -142,4 +157,33 @@
                 }
             });
         });
+
+        // Submit Form via AJAX
+        $('#editUserForm').on('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: formData,
+                success: function(response) {
+                    // Handle successful update
+                    $('#userModal').modal('hide');
+
+                    // refresh datatable
+                    $('#user_datatable').DataTable().ajax.reload();
+                    alert('User updated successfully');
+                    showNotification(response.success);
+                },
+                error: function(response) {
+                    // Handle errors
+                    alert('Error Updating User');
+                    showNotification(response.error);
+                }
+            });
+        });
+
+
 </script>
