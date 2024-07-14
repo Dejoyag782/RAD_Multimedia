@@ -30,8 +30,13 @@ class UserController extends Controller
             'user_type' => $request->user_type,
         ]);
 
+        if ($request->ajax()) {
+            return response()->json(['success' => 'User added successfully.']);
+        }
+
         return redirect()->route('users')->with('success', 'User added successfully.');
     }
+
 
     public function getUsers(Request $request)
     {

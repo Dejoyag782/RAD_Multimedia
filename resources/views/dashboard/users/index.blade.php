@@ -55,7 +55,6 @@
         </div>
 
         @include('dashboard.users.ajax')
-        @include('dashboard.users.modal')
-        @include('dashboard.users.add-user-modal')
+        @include('dashboard.users.modals')
 
 </x-app-layout>
