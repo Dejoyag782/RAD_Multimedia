@@ -93,9 +93,10 @@
                     $('#userModal #email').text(response.email);
                     $('#userModal #edit_user_type').val(response.user_type);
                     // Assuming response.profile_pic contains the URL of the profile picture
-                    var profilePicUrl = response.profile_pic ? response.profile_pic : 'https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg';
+                    var profilePicUrl = response.profile_pic ? `storage/${response.profile_pic}` : 'https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg';
                     // Set the background image of the profile_pic div
-                    $('#userModal #profile_pic').css('background-image', `url(storage/${profilePicUrl})`);
+                    $('#userModal #profile_pic').css('background-image', `url(${profilePicUrl})`);
+
                 },
                 error: function(response) {
                     // alert('Error fetching user details.');
