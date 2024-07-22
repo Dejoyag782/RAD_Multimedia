@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Messages;
+use App\Models\History;
 
 class WelcomeController extends Controller
 {
@@ -12,7 +13,11 @@ class WelcomeController extends Controller
 
     public function index()
     {
-        return view('welcome');
+
+        $perPage = 5; // Define the number of items per page
+        $histories = History::orderBy('created_at', 'desc')->paginate($perPage);
+        
+        return view('welcome', compact('histories'));
     }
     
     public function store(Request $request)
@@ -34,5 +39,12 @@ class WelcomeController extends Controller
 
         // Optionally, you can return a response or redirect
         return redirect()->back()->with('success', 'Message sent successfully!');
+    }
+
+    public function displayHistoryData(Request $request)
+    {
+        $perPage = 5; // Define the number of items per page
+        $histories = History::orderBy('created_at', 'desc')->paginate($perPage);
+        return response()->json($histories);
     }
 }

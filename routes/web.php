@@ -1,11 +1,15 @@
 <?php
 
+// Controllers
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\DashController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\HistoryController;
+
+// Middlewares
 use App\Http\Middleware\CheckAdminRole;
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -25,21 +29,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard.portfolio.index');
     })->name('portfolio');
 
-    Route::get('/history', function () {
-        return view('dashboard.history.index');
-    })->name('history');
+    Route::get('/history', [HistoryController::class, 'index'])->name('history');
+    Route::get('/get-history', [HistoryController::class, 'getHistoryData'])->name('getHistoryData');
+    Route::post('/history/store', [HistoryController::class, 'store'])->name('history.store');    
+    Route::get('/history/{id}', [HistoryController::class, 'showHistory']);
 
     Route::get('/team', function () {
         return view('dashboard.team.index');
     })->name('team');
-
-    // Route::get('/messages', function () {
-    //     return view('dashboard.messages.index');
-    // })->name('messages');
-
-    // Route::get('/users', function () {
-    //     return view('dashboard.users.index');
-    // })->name('users');
 
     // Messages Route
     Route::get('/messages', [MessageController::class, 'index'])->name('messages');
@@ -56,20 +53,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 });
 
+// Routes that only admins can access
 Route::middleware(['auth','isAdmin'])->group(function () {
-    // Routes that only admins can access
     // Users Route 
     Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
     Route::get('/users', [UserController::class, 'index'])->name('users');
     Route::post('/get-users', [UserController::class, 'getUsers'])->name('getUsers');    
     Route::post('/delete-user', [UserController::class, 'deleteUser'])->name('deleteUser');
-    // Route::get('/users/{id}', [UserController::class, 'showUser']);
     Route::get('/users/{id}', [UserController::class, 'showUser'])->name('users.show');
     Route::post('/users/update/{id}', [UserController::class, 'updateUser'])->name('users.update');
 });
 
 
-    Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+    Route::get('/', [WelcomeController::class, 'index'])->name('welcome');    
+    Route::get('/display-history', [WelcomeController::class, 'displayHistoryData'])->name('displayHistoryData');
+
     Route::post('/message/store', [WelcomeController::class, 'store'])->name('message.store');
 
 Route::middleware('auth')->group(function () {

@@ -23,12 +23,12 @@
                   <option value="mod">Moderator</option>
                   <option value="ad">Admin</option>                  
                 </select>
-            </div>
+              </div>
             
 
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Save Changes</button>
+          <button type="submit" class="btn btn-primary" id="submit-userchange-btn" hidden="true">Save Changes</button>
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         </div>
         </form>

@@ -177,7 +177,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="list-group timeline">
-                        <li class="list-group-item">
+                        <!-- <li class="list-group-item">
                             <div class="timeline-image"><img class="rounded-circle img-fluid" src="welcome_assets/img/about/1.jpg"></div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
@@ -188,7 +188,25 @@
                                     <p class="text-muted">RAD Clips Media began when Nissan Bohol looked for videographers to shoot a testimonial video. This is when the founders of RAD which are Dex Joshua Curayag &amp; Rogelio Tasong Jr. were asked to shoot for a testimonial video.&nbsp;</p>
                                 </div>
                             </div>
-                        </li>
+                        </li> -->
+
+                            @foreach ($histories as $history)
+                                <li class="list-group-item {{ $loop->iteration % 2 == 0 ? 'timeline-inverted' : 'timeline' }}">
+                                    <div class="timeline-image"><img id="photo" class="rounded-circle img-fluid" src="welcome_assets/img/about/2.jpg"></div>
+                                    <div class="{{ $loop->iteration % 2 == 0 ? 'text-start' : 'text-end' }} timeline-panel">
+                                        <div class="timeline-heading">
+                                            <h4 id="timeline">{{ $history->timeline }}</h4>
+                                            <h4 id="title" class="subheading">{{ $history->title }}</h4>
+                                        </div>
+                                        <div class="timeline-body">
+                                            <p id="desc" class="text-muted">{{ $history->desc }}</p>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+
+                        <!-- Pagination links -->
+                        {{ $histories->links() }}
                         <li class="list-group-item timeline-inverted">
                             <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xxl-center align-items-xxl-center timeline-image">
                                 <h4 style="margin-top: 0;margin-bottom: 0;">Be Part<br>&nbsp;Of Our<br>&nbsp;Story!</h4>

@@ -87,7 +87,6 @@
                 type: 'GET',
                 success: function(response) {
                     // Populate modal fields
-                    $('#editUserForm').attr('action', '/users/update/' + response.id); // Set form action dynamically
                     $('#userModal #id').val(response.id);
                     $('#userModal #name').text(response.name);
                     $('#userModal #email').text(response.email);
@@ -96,6 +95,8 @@
                     var profilePicUrl = response.profile_pic ? `storage/${response.profile_pic}` : 'https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg';
                     // Set the background image of the profile_pic div
                     $('#userModal #profile_pic').css('background-image', `url(${profilePicUrl})`);
+                    $('#editUserForm').attr('action', '/users/update/' + response.id); // Set form action dynamically
+                    
 
                 },
                 error: function(response) {
