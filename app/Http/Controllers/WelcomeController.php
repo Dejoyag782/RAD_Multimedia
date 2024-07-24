@@ -15,7 +15,7 @@ class WelcomeController extends Controller
     {
 
         $perPage = 5; // Define the number of items per page
-        $histories = History::orderBy('created_at', 'desc')->paginate($perPage);
+        $histories = History::orderBy('id', 'asc')->paginate($perPage);
         
         return view('welcome', compact('histories'));
     }
@@ -44,7 +44,7 @@ class WelcomeController extends Controller
     public function displayHistoryData(Request $request)
     {
         $perPage = 5; // Define the number of items per page
-        $histories = History::orderBy('created_at', 'desc')->paginate($perPage);
+        $histories = History::orderBy('id','desc')->paginate($perPage);
         return response()->json($histories);
     }
 }

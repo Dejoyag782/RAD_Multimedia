@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('timeline');
             $table->string('title');
             $table->string('desc');
-            $table->text('photo')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

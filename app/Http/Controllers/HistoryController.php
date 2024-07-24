@@ -11,37 +11,44 @@ class HistoryController extends Controller
     public function index()
     {
         $perPage = 5; // Define the number of items per page
-        $histories = History::orderBy('created_at', 'desc')->paginate($perPage);
+        $histories = History::orderBy('id')->paginate($perPage);
         
         // Pass the paginated histories to the view
         return view('dashboard.history.index', compact('histories'));
     }
 
-    public function store(Request $request)
+    public function storeOrUpdate(Request $request)
     {
-        // Validate the incoming request data
         $request->validate([
+            'id' => 'nullable|exists:histories,id',
             'timeline' => 'required|string|max:255',
-            'title' => 'required|email|max:255',
-            'desc' => 'required|string|min:8',
-            'photo' => 'nullable|string',
-            // Add other validation rules as necessary
+            'title' => 'required|string|max:255',
+            'desc' => 'required|string',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:5000',
         ]);
 
-        // Create a new history entry
-        $history = new History();
-        $history->timeline = $request->input('timeline');
-        $history->title = $request->input('title');
-        $history->desc = $request->input('desc'); // Encrypt the password
-        $history->photo = $request->input('photo');
-        // Set other properties as necessary
+        $data = $request->only(['timeline', 'title', 'desc']);
+        $photoPath = null;
 
-        // Save the new history entry
-        $history->save();
+        // Handle photo upload
+        if ($request->hasFile('photo')) {
+            $photo = $request->file('photo');
+            $photoPath = $photo->store('public/photos');
+            $data['photo'] = str_replace('public/', '', $photoPath); // Remove 'public/' for storing in database
+        }
 
-        // Redirect back with a success message
-        return redirect()->back()->with('success', 'History entry added successfully!');
+        if ($request->filled('id')) {
+            // Update existing timeline
+            $timeline = History::findOrFail($request->id);
+            $timeline->update($data);
+        } else {
+            // Create new timeline
+            History::create($data);
+        }
+
+        return redirect('/history')->with('success', 'Timeline saved successfully!');
     }
+
 
     public function showHistory($id)
     {

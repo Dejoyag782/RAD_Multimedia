@@ -27,17 +27,7 @@
 
                                     <div class="row">
                                         <div class="col-12">
-                                            <table id="datatable" class="table" style="width:100%">
-                                                <thead class="table-dark">
-                                                    <tr>
-                                                        <td>Name</td>
-                                                        <td>Email</td>
-                                                        <td>Phone</td>                                                        
-                                                        <td>Description</td>
-                                                        <td>Action</td>
-                                                    </tr>
-                                                </thead>
-                                            </table>
+                                            @include('dashboard.messages.table')
                                         </div>
                                     </div>
                                 </div>

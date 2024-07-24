@@ -25,10 +25,6 @@
                     no-repeat, #ffffff;background-size: cover, auto;
                     min-height: 200px!important; min-width:200px!important; max-width:250px!important; max-height:250px!important;">
                     </div>
-                    {{-- <img id="selectedImage" class="rounded-circle mx-auto"
-                    style="min-height: 200px!important; min-width:200px!important; max-width:250px!important; max-height:250px!important;"
-                    src="{{ $user->profile_pic ? asset('storage/' . $user->profile_pic) : 'https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg' }}"
-                    alt="example placeholder" /> --}}
                 </div>
                 <div class="d-flex justify-content-right">
                     <div data-mdb-ripple-init class="btn btn-primary btn-rounded" >

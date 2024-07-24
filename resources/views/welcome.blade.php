@@ -177,23 +177,13 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="list-group timeline">
-                        <!-- <li class="list-group-item">
-                            <div class="timeline-image"><img class="rounded-circle img-fluid" src="welcome_assets/img/about/1.jpg"></div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4>November 2023</h4>
-                                    <h4 class="subheading">How we Began</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p class="text-muted">RAD Clips Media began when Nissan Bohol looked for videographers to shoot a testimonial video. This is when the founders of RAD which are Dex Joshua Curayag &amp; Rogelio Tasong Jr. were asked to shoot for a testimonial video.&nbsp;</p>
-                                </div>
-                            </div>
-                        </li> -->
-
+                        
                             @foreach ($histories as $history)
                                 <li class="list-group-item {{ $loop->iteration % 2 == 0 ? 'timeline-inverted' : 'timeline' }}">
-                                    <div class="timeline-image"><img id="photo" class="rounded-circle img-fluid" src="welcome_assets/img/about/2.jpg"></div>
-                                    <div class="{{ $loop->iteration % 2 == 0 ? 'text-start' : 'text-end' }} timeline-panel">
+                                <div class="timeline-image" style="background-size: cover, auto; 
+                                        no-repeat; background-image: url({{ $history->photo ? asset('storage/'.$history->photo) : 'https://static.vecteezy.com/system/resources/previews/021/277/888/original/picture-icon-in-flat-design-style-gallery-symbol-illustration-png.png' }});">
+                                </div>
+                                <div class="{{ $loop->iteration % 2 == 0 ? 'text-start' : 'text-end' }} timeline-panel">
                                         <div class="timeline-heading">
                                             <h4 id="timeline">{{ $history->timeline }}</h4>
                                             <h4 id="title" class="subheading">{{ $history->title }}</h4>
@@ -205,14 +195,25 @@
                                 </li>
                             @endforeach
 
-                        <!-- Pagination links -->
-                        {{ $histories->links() }}
-                        <li class="list-group-item timeline-inverted">
-                            <div class="d-flex d-sm-flex d-md-flex d-lg-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-lg-center align-items-lg-center justify-content-xxl-center align-items-xxl-center timeline-image">
-                                <h4 style="margin-top: 0;margin-bottom: 0;">Be Part<br>&nbsp;Of Our<br>&nbsp;Story!</h4>
-                            </div>
-                        </li>
+                            @if ($histories->currentPage() == $histories->lastPage())
+                                <li class="list-group-item timeline-inverted">
+                                    <button class="btn btn-primary d-flex justify-content-center align-items-center timeline-image">
+                                        <h4 style="margin-top: 0;margin-bottom: 0;">&nbsp;Be Part<br>&nbsp;Of Our<br>&nbsp;Story!</h4>
+                                    </button> 
+                                </li>
+                            @else
+                                <li class="list-group-item timeline-inverted">
+                                    <button class="btn btn-primary d-flex justify-content-center align-items-center timeline-image">
+                                        <h4 style="margin-top: 0;margin-bottom: 0;">&nbsp;See More<br>&nbsp;Of Our<br>&nbsp;Story!</h4>
+                                    </button>
+                                </li>
+                            @endif
                     </ul>
+                    <!-- Pagination links -->
+                    <div style="padding:15px; margin-top:20px; min-width:auto; background-color: rgb(33 37 41); display:flex; flex-direction:center; justify-content:center;">
+                        {{ $histories->links('vendor.pagination.simple-tailwind') }}
+                    </div>
+
                 </div>
             </div>
         </div>
