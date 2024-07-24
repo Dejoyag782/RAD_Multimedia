@@ -3,7 +3,10 @@
 
             <div class="text-end">
                 <button class="btn btn-primary view-history-btn" data-id="{{ $history->id }}" data-bs-toggle="modal" data-bs-target="#HistoryModal">
-                    <i class="fa fa-pencil"></i><span>Edit Timeline</span>
+                    <i class="fa fa-pencil"></i>
+                </button>
+                <button class="btn btn-danger delete-history-btn" data-id="{{ $history->id }}">
+                    <i class="fa fa-trash"></i>
                 </button>
             </div>
             <div class="timeline-image" style="background-size: cover, auto; 

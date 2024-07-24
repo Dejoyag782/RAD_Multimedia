@@ -32,6 +32,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/history', [HistoryController::class, 'index'])->name('history');
     Route::get('/get-history', [HistoryController::class, 'getHistoryData'])->name('getHistoryData');
     Route::post('/timeline/store-or-update', [HistoryController::class, 'storeOrUpdate'])->name('timeline.storeOrUpdate');   
+    Route::delete('/destroy-history/{historyId}', [HistoryController::class, 'destroyHistory'])->name('history.destroy');
     Route::get('/history/{id}', [HistoryController::class, 'showHistory']);    
 
     Route::get('/team', function () {

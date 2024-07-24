@@ -74,5 +74,29 @@ class HistoryController extends Controller
         return response()->json($history);
     }
 
+    public function destroyHistory(Request $request, $historyId)
+    {
+        $history = History::findOrFail($historyId); // Find the history with the given ID
+
+        // Check if history exists (optional, depending on your error handling preference)
+        if (!$history) {
+            return response()->json(['error' => 'History not found.'], 404);
+        }
+
+        try {
+            // Delete the history record
+            $history->delete();
+
+            // Additional actions (optional)
+            // - Delete associated files (if applicable)
+            // - Log the deletion
+
+            return response()->json(['success' => 'History deleted successfully.'], 200);
+        } catch (Exception $e) {
+            // Handle potential deletion errors (e.g., database constraints)
+            return response()->json(['error' => 'An error occurred during deletion.'], 500);
+        }
+    }
+
     
 }
