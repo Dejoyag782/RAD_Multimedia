@@ -76,26 +76,34 @@ class HistoryController extends Controller
 
     public function destroyHistory(Request $request, $historyId)
     {
-        $history = History::findOrFail($historyId); // Find the history with the given ID
+    $history = History::findOrFail($historyId);
 
-        // Check if history exists (optional, depending on your error handling preference)
-        if (!$history) {
-            return response()->json(['error' => 'History not found.'], 404);
+    // Check if history exists (optional)
+    if (!$history) {
+        return response()->json(['error' => 'History not found.'], 404);
+    }
+
+    try {
+        // Delete the history record
+        $history->delete();
+
+        // Optional: Delete associated photo
+        if ($history->photo) {
+        $photoPath = $history->photo; // Get the photo path from the model
+        if (Storage::disk('public')->exists($photoPath)) {
+            Storage::disk('public')->delete($photoPath);
+            Log::info("Deleted photo for deleted history {$historyId}: {$photoPath}");
+        } else {
+            // Log if no existing file found (optional)
+            // Log::warning("No existing photo found for deleted history {$historyId}");
+        }
         }
 
-        try {
-            // Delete the history record
-            $history->delete();
-
-            // Additional actions (optional)
-            // - Delete associated files (if applicable)
-            // - Log the deletion
-
-            return response()->json(['success' => 'History deleted successfully.'], 200);
-        } catch (Exception $e) {
-            // Handle potential deletion errors (e.g., database constraints)
-            return response()->json(['error' => 'An error occurred during deletion.'], 500);
-        }
+        return response()->json(['success' => 'History deleted successfully.'], 200);
+    } catch (Exception $e) {
+        // Handle potential deletion errors (e.g., database constraints)
+        return response()->json(['error' => 'An error occurred during deletion.'], 500);
+    }
     }
 
     
