@@ -26,35 +26,30 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="team-member"><img class="rounded-circle mx-auto" src="welcome_assets/img/team/318802872_3421445571510773_8389724998033089710_n.jpg">
+                                            <ul class="list-inline social-buttons" style="margin-top:-40px; margin-right:-100px;">
+                                                <li class="list-inline-item" style=" border: white 5px solid; border-radius:50%;"><a href="https://www.linkedin.com/in/dex-joshua-curayag-67764b316/"><i class="fa fa-linkedin"></i></a></li>
+                                            </ul>
                                             <h4>Dex Joshua Curayag</h4>
                                             <p class="text-muted">Videographer | Sound Designer | Video Editor</p>
-                                            <ul class="list-inline social-buttons">
-                                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                <li class="list-inline-item"><a href="https://www.facebook.com/dexjoshua.curayag.5/"><i class="fa fa-facebook"></i></a></li>
-                                                <li class="list-inline-item"><a href="https://www.linkedin.com/in/dex-joshua-curayag-67764b316/"><i class="fa fa-linkedin"></i></a></li>
-                                            </ul>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="team-member"><img class="rounded-circle mx-auto" src="welcome_assets/img/team/312658485_3350485938527610_3870889274646053422_n.jpg">
+                                            <ul class="list-inline social-buttons" style="margin-top:-40px; margin-right:-100px;">
+                                                <li class="list-inline-item" style=" border: white 5px solid; border-radius:50%;"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                            </ul>
                                             <h4>Rogelio Tasong Jr</h4>
                                             <p class="text-muted">Video Editor | Videographer | Graphic Designer</p>
-                                            <ul class="list-inline social-buttons">
-                                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                <li class="list-inline-item"><a href="https://www.facebook.com/rj.tasong"><i class="fa fa-facebook"></i></a></li>
-                                                <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            </ul>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="team-member"><img class="rounded-circle mx-auto" src="welcome_assets/img/team/93245406_1585567444925506_8528516718580989952_n.jpg">
+                                            <ul class="list-inline social-buttons" style="margin-top:-40px; margin-right:-100px;">
+                                                <li class="list-inline-item" style=" border: white 5px solid; border-radius:50%;"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                            </ul>
                                             <h4>Aleksandr Memphis Olaguir</h4>
                                             <p class="text-muted">Photographer | Graphic Designer | Photo Editor</p>
-                                            <ul class="list-inline social-buttons">
-                                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                <li class="list-inline-item"><a href="https://www.facebook.com/Memphis1302"><i class="fa fa-facebook"></i></a></li>
-                                                <li class="list-inline-item"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            </ul>
+                                            
                                         </div>
                                     </div>
                                 </div>

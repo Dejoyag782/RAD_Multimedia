@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Messages;
+use App\Models\Message;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -102,7 +102,7 @@ class MessageController extends Controller
     public function archiveMessage(Request $request)
     {
         $id = $request->input('id');
-        $message = Messages::find($id);
+        $message = Message::find($id);
 
         if ($message) {
             $message->archived = 1;
@@ -117,7 +117,7 @@ class MessageController extends Controller
     public function deleteMessage(Request $request)
     {
         $id = $request->input('id');
-        $message = Messages::find($id);
+        $message = Message::find($id);
 
         if ($message) {
             $message->delete();
@@ -129,7 +129,7 @@ class MessageController extends Controller
 
     public function showMessage($id)
     {
-        $message = Messages::find($id);
+        $message = Message::find($id);
 
         if ($message) {
             return response()->json($message);
