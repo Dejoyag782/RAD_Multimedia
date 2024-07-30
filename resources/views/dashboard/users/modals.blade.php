@@ -28,8 +28,8 @@
 
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-primary" id="submit-userchange-btn" hidden="true">Save Changes</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" id="submit-userchange-btn">Save Changes</button>
+          <button type="button" class="btn btn-secondary close-modal" data-bs-dismiss="modal">Close</button>
         </div>
         </form>
       </div>
@@ -70,8 +70,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Add User</button>
+            <button type="button" class="btn btn-secondary close-modal" data-dismiss="modal">Close</button>
         </div>
     </form>
       </div>

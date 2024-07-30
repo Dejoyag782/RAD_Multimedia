@@ -8,6 +8,7 @@ use App\Http\Controllers\DashController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\TeamController;
 
 // Middlewares
 use App\Http\Middleware\CheckAdminRole;
@@ -35,9 +36,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/destroy-history/{historyId}', [HistoryController::class, 'destroyHistory'])->name('history.destroy');
     Route::get('/history/{id}', [HistoryController::class, 'showHistory']);    
 
-    Route::get('/team', function () {
-        return view('dashboard.team.index');
-    })->name('team');
+    Route::get('/team', [TeamController::class, 'index'])->name('team');
+    Route::post('/team/store', [TeamController::class, 'store'])->name('team.store');
+    Route::post('/get-team', [TeamController::class, 'getTeam'])->name('getTeamMember');    
+    Route::post('/delete-member', [TeamController::class, 'deleteMember'])->name('deleteTeamMember');
+    Route::get('/team/{id}', [TeamController::class, 'showMember'])->name('team.show');
+    Route::post('/team/update/{id}', [TeamController::class, 'updateMember'])->name('team.update');
 
     // Messages Route
     Route::get('/messages', [MessageController::class, 'index'])->name('messages');
@@ -57,8 +61,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // Routes that only admins can access
 Route::middleware(['auth','isAdmin'])->group(function () {
     // Users Route 
-    Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
     Route::get('/users', [UserController::class, 'index'])->name('users');
+    Route::post('/users/store', [UserController::class, 'store'])->name('users.store');
     Route::post('/get-users', [UserController::class, 'getUsers'])->name('getUsers');    
     Route::post('/delete-user', [UserController::class, 'deleteUser'])->name('deleteUser');
     Route::get('/users/{id}', [UserController::class, 'showUser'])->name('users.show');

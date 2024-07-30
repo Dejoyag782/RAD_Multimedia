@@ -19,11 +19,11 @@
 
         // -----------------------------------------------------------start datatable display-----------------------------------------//
 
-        $('#users_datatable').DataTable({
+        $('#team_datatable').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('getUsers') }}",
+                url: "{{ route('getTeamMember') }}",
                 type: "POST",
                 data: function (data) {
                     data.search = $('input[type="search"]').val();
@@ -34,20 +34,27 @@
             searching: true,
             aoColumns: [
                 {
-                    data: 'profile_pic',
+                    data: 'photo',
                     render: function (data, type, row) {
-                        var profilePicUrl = data ? `{{ asset('storage/') }}/${data}` : `{{ asset('welcome_assets/img/no-picture.svg')}}`;
-                        return `<div class="rounded-circle mx-auto" style="background-image: url('${profilePicUrl}'); no-repeat, #ffffff; background-size: cover, auto; min-height: 50px!important; min-width: 50px!important; max-width: 50px!important; max-height: 50px!important;"></div>`;
+                        var photoUrl = data ? `{{ asset('storage/') }}/${data}` : `{{ asset('welcome_assets/img/no-picture.svg')}}`;
+                        return `<div class="rounded-circle mx-auto" style="background-image: url('${photoUrl}'); no-repeat, #ffffff;
+                        background-size: cover, auto; min-height: 50px!important; min-width: 50px!important; max-width: 50px!important;
+                        max-height: 50px!important;"></div>`;
                     }
                 },
                 {
                     data: 'name',
                 },
                 {
-                    data: 'email',
+                    data: 'linked_in',
+                    render: function (data, type, row) {
+                        return `<ul class="list-inline social-buttons">
+                            <li class="list-inline-item display-flex justify-content-center align-items-center"><a class="justify-content-center align-items-center" href="${data}"><i style="padding-left:10px;" class="fa fa-linkedin"></i></a></li>
+                        </ul>`;
+                    }
                 },
                 {
-                    data: 'user_type',
+                    data: 'team_member_roles',
                     render: function(data) {
                         if (data === 'ad') {
                             return 'Admin';
@@ -61,7 +68,7 @@
                 {
                     data: null,
                     render: function (data, type, row) {
-                            return '<button type="button" class="btn btn-secondary view-user-btn" data-bs-toggle="modal" data-id="' + row.id + '" data-bs-target="#userModal"><i class="fa fa-eye"></i></button>' + 
+                            return '<button type="button" class="btn btn-secondary view-team-btn" data-bs-toggle="modal" data-id="' + row.id + '" data-bs-target="#teamModal"><i class="fa fa-eye"></i></button>' + 
                             '<button style="margin-left:5px;" class="btn btn-danger delete-btn" data-id="' + row.id + '" data-name="' + row.name + '"><i class="fa fa-trash"></i></button>';
                         },
                     orderable: false
@@ -77,37 +84,37 @@
 
         // -----------------------------------------------------------start view/delete/archive-----------------------------------------//
 
-        // View Users Details
-        $('#users_datatable').on('click', '.view-user-btn', function() {
+        // View Team Details
+        $('#team_datatable').on('click', '.view-team-btn', function() {
             var id = $(this).data('id');
 
             // Fetch data using AJAX
             $.ajax({
-                url: '/users/' + id,  // Adjust the URL to your route
+                url: '/team/' + id,  // Adjust the URL to your route
                 type: 'GET',
                 success: function(response) {
                     // Populate modal fields
-                    $('#userModal #id').val(response.id);
-                    $('#userModal #name').text(response.name);
-                    $('#userModal #email').text(response.email);
-                    $('#userModal #edit_user_type').val(response.user_type);
+                    $('#teamModal #id').val(response.id);
+                    $('#teamModal #name').val(response.name);
+                    $('#teamModal #linked_in').val(response.linked_in);
                     // Assuming response.profile_pic contains the URL of the profile picture
-                    var profilePicUrl = response.profile_pic ? `storage/${response.profile_pic}` : `{{ asset('welcome_assets/img/no-picture.svg')}}`;
-                    // Set the background image of the profile_pic div
-                    $('#userModal #profile_pic').css('background-image', `url(${profilePicUrl})`);
-                    $('#editUserForm').attr('action', '/users/update/' + response.id); // Set form action dynamically
+                    var photoUrl = response.photo ? `storage/${response.photo}` : `{{ asset('welcome_assets/img/no-picture.svg')}}`;
+                    // Set the background image of the profile_pic div                    
+                    console.log(response.photo);
+                    $('#teamModal #selectedImage').css('background-image', `url(${photoUrl})`);
+                    $('#editTeamForm').attr('action', '/team/update/' + response.id); // Set form action dynamically
                     
 
                 },
                 error: function(response) {
-                    // alert('Error fetching user details.');
-                    showNotification('Error fetching user details.');
+                    // alert('Error fetching team details.');
+                    showNotification('Error fetching member details.');
                 }
             });
         });
 
         // Delete Button using sweet alerts
-        $('#users_datatable').on('click', '.delete-btn', function() {
+        $('#team_datatable').on('click', '.delete-btn', function() {
             var id = $(this).data('id');
             var name = $(this).data('name'); // This should now return the correct name
 
@@ -123,7 +130,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ route('deleteUser') }}",
+                        url: "{{ route('deleteTeamMember') }}",
                         type: "POST",
                         data: { id: id },
                         headers: {
@@ -131,7 +138,7 @@
                         },
                         success: function(response) {
                             showNotification(response.success);
-                            $('#users_datatable').DataTable().ajax.reload();
+                            $('#team_datatable').DataTable().ajax.reload();
                         },
                         error: function(response) {
                             showNotification(response.responseJSON.error);
@@ -145,64 +152,93 @@
 
         // -----------------------------------------------------------end view/delete/archive-----------------------------------------//
 
-$(document).ready(function() {
+        $(document).ready(function() {
 
-    $('#addUserForm').on('submit', function(event) {
-            event.preventDefault();
+            $('#addTeamForm').on('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                var formData = new FormData(this);
+
+                $.ajax({
+                    url: $(this).attr('action'), // Use the form's action URL
+                    method: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        
+
+                        // Show a success notification
+                        
+                        showNotification(response.success); // You might replace this with a custom notification function
+                        // Hide the modal and reset the form
+                        $('#addTeamModal .close-modal').click();
+
+                        $('#addTeamForm')[0].reset();
+
+                        // Optionally, refresh your DataTable
+                        $('#team_datatable').DataTable().ajax.reload();
+                    },
+                    error: function(xhr) {
+                        // Handle validation errors
+                        var errors = xhr.responseJSON.errors;
+                        var errorMessage = '';
+                        for (var key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                errorMessage += errors[key] + '\n';
+                            }
+                        }
+                        showNotification(errorMessage);
+                    }
+                });
+            });
+        
+
+        // Submit Form via AJAX
+        $('#editTeamForm').on('submit', function(e) {
+            e.preventDefault(); // Prevent default form submission
 
             var formData = new FormData(this);
 
             $.ajax({
                 url: $(this).attr('action'),
-                method: 'POST',
+                type: 'POST',
                 data: formData,
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    $('#addUserModal .close-modal').click();
-                    $('#addUserForm')[0].reset();
-                    // Optionally, refresh your datatable here
-                    showNotification(response.success);
-                    $('#users_datatable').DataTable().ajax.reload();
-                },
-                error: function(xhr) {
-                    var errors = xhr.responseJSON.errors;
-                    var errorMessage = '';
-                    for (var key in errors) {
-                        if (errors.hasOwnProperty(key)) {
-                            errorMessage += errors[key] + '\n';
-                        }
-                    }
-                    showNotification(errorMessage);
-                }
-            });
-        });
-
-        // Submit Form via AJAX
-        $('#editUserForm').on('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
-
-            var formData = $(this).serialize();
-
-            $.ajax({
-                url: $(this).attr('action'),
-                type: 'POST',
-                data: formData,
-                success: function(response) {
                     // Handle successful update
-                    $('#userModal .close-modal').click();
+                    $('#teamModal').modal('hide');
 
                     // refresh datatable
-                    $('#users_datatable').DataTable().ajax.reload();
+                    $('#team_datatable').DataTable().ajax.reload();
                     showNotification(response.success);
                 },
                 error: function(response) {
                     // Handle errors
+                    alert('Error Updating Member');
                     showNotification(response.error);
                 }
             });
         });
 
     });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all elements with the class 'dynamic-choices'
+            var elements = document.querySelectorAll('.multiple-choices');
+            
+            elements.forEach(function(element) {
+                // Initialize Choices for each element
+                new Choices(element, {
+                    removeItemButton: true,
+                    placeholder: true,
+                    placeholderValue: 'Select roles',
+                    allowHTML: true
+                });
+            });
+        });
+
+
 
 </script>

@@ -19,8 +19,8 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide&amp;display=swap">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&amp;display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-        <!-- Cropper.js CSS -->
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet"/>
+        <!-- Include Choices.js CSS -->
+        <link rel="stylesheet" href="{{asset('welcome_assets/css/choices.min.css')}}" />
         <link rel="stylesheet" href="{{asset('welcome_assets/fonts/font-awesome.min.css')}}">    
         <link rel="stylesheet" href="{{asset('welcome_assets/fonts/ionicons.min.css')}}">
         <link rel="stylesheet" href="{{asset('welcome_assets/css/bootstrap.min.css')}}">
@@ -29,7 +29,9 @@
         <link rel="stylesheet" href="{{asset('welcome_assets/css/bootstrap_modified.css')}}">
         <link rel="stylesheet" href="{{asset('welcome_assets/css/Article-List.css')}}">
 
-         <!-- Scripts -->
+         <!-- Scripts -->          
+        <!-- Include Choices.js JS -->
+        <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
         <script src="{{asset('welcome_assets/js/agency.js')}}"></script>
         <script src="{{asset('welcome_assets/js/bootstrap.js')}}"></script>
         <script src="{{asset('welcome_assets/js/bootstrap.min.js')}}"></script>

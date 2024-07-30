@@ -34,7 +34,6 @@ class UserController extends Controller
             return response()->json(['success' => 'User added successfully.']);
         }
 
-        return redirect()->route('users')->with('success', 'User added successfully.');
     }
 
 
@@ -94,7 +93,9 @@ class UserController extends Controller
         $user->user_type = $request->input('user_type');
         $user->save();
     
-        return redirect()->route('users')->with('message', 'User updated successfully.');
+        if ($request->ajax()) {
+            return response()->json(['success' => 'User Updated successfully.']);
+        }
     }
     
 

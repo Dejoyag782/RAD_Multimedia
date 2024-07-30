@@ -21,7 +21,7 @@
             <x-input-label for="profile_pic" :value="__('Profile Photo')" />
             <div>
                 <div class="mb-4 d-flex justify-content-left" style="display: flex; justify-content:left !important; max-height: 200px!important; min-width:200px!important; max-width:250px!important; ">
-                    <div id="selectedImage" class="rounded-circle mx-auto" style="background-image: url({{ $user->profile_pic ? asset('storage/' . $user->profile_pic) : 'https://static.vecteezy.com/system/resources/previews/009/734/564/original/default-avatar-profile-icon-of-social-media-user-vector.jpg' }});
+                    <div id="selectedImage" class="rounded-circle mx-auto" style="background-image: url({{ $user->profile_pic ? asset('storage/' . $user->profile_pic) : 'welcome_assets/img/no-picture.svg' }});
                     no-repeat, #ffffff;background-size: cover, auto;
                     min-height: 200px!important; min-width:200px!important; max-width:250px!important; max-height:250px!important;">
                     </div>
