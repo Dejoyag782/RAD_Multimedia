@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Messages;
 use App\Models\History;
+use App\Models\Team;
+use App\Models\TeamMemberRole;
+use App\Models\Role;
 
 class WelcomeController extends Controller
 {
@@ -15,9 +18,11 @@ class WelcomeController extends Controller
     {
 
         $perPage = 5; // Define the number of items per page
+        $perTeam = 6;
         $histories = History::orderBy('id', 'asc')->paginate($perPage);
+        $team = Team::orderBy('id','asc')->paginate($perTeam);
         
-        return view('welcome', compact('histories'));
+        return view('welcome', compact('histories','team'));
     }
     
     public function store(Request $request)
@@ -46,5 +51,12 @@ class WelcomeController extends Controller
         $perPage = 5; // Define the number of items per page
         $histories = History::orderBy('id','desc')->paginate($perPage);
         return response()->json($histories);
+    }
+
+    public function displayTeamData(Request $request)
+    {
+        $perTeam = 6; // Define the number of items per page
+        $team = Team::orderBy('id','desc')->paginate($perTeam);
+        return response()->json($team);
     }
 }

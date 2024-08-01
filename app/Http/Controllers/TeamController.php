@@ -29,6 +29,8 @@ class TeamController extends Controller
             'name' => 'required|string|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:20000',
             'linked_in' => 'required|string|max:255|unique:teams',
+            'member_roles' => 'array', // Ensuring member_roles is provided as an array
+            'member_roles.*' => 'exists:roles,id', // Ensuring each role exists in the roles table    
         ]);
 
         $photoPath = null;
@@ -37,11 +39,19 @@ class TeamController extends Controller
             $photoPath = str_replace('public/', '', $photoPath); // Remove 'public/' from the path
         }
 
-        Team::create([
-            'name' => $request->name,            
+        $team = Team::create([
+            'name' => $request->name,
             'photo' => $photoPath,
             'linked_in' => $request->linked_in,
         ]);
+
+        // Attach roles to the team
+        foreach ($request->member_roles as $roleId) {
+            TeamMemberRole::create([
+                'team_member_id' => $team->id,
+                'role_id' => $roleId,
+            ]);
+        }
 
         if ($request->ajax()) {
             return response()->json(['success' => 'Member added successfully.']);
@@ -64,13 +74,13 @@ class TeamController extends Controller
         $orderBy = $request->order[0]['dir'] ?? 'desc';
 
         // get data from team table
-        $query = Team::select(['id', 'name', 'photo', 'linked_in']);
+        $query = Team::with('roles')->select(['id', 'name', 'photo', 'linked_in']);
 
         // Search
-        $search = $request->search;
-        $query = $query->where(function($query) use ($search) {
-            $query->orWhere('name', 'like', "%".$search."%");
-        });
+        $search = $request->search['value'] ?? null;
+        if ($search) {
+            $query->where('name', 'like', "%" . $search . "%");
+        }
 
         $orderByName = 'name';
         switch ($orderColumnIndex) {
@@ -81,11 +91,28 @@ class TeamController extends Controller
                 $orderByName = 'name';
                 break;
         }
-        $query = $query->orderBy($orderByName, $orderBy);
+        $query->orderBy($orderByName, $orderBy);
         $recordsFiltered = $recordsTotal = $query->count();
-        $team = $query->skip($skip)->take($pageLength)->get();
 
-        return response()->json(["draw" => $request->draw, "recordsTotal" => $recordsTotal, "recordsFiltered" => $recordsFiltered, 'data' => $team], 200);
+        $teams = $query->skip($skip)->take($pageLength)->get();
+
+        // Prepare the data
+        $data = $teams->map(function ($team) {
+            return [
+                'id' => $team->id,
+                'name' => $team->name,
+                'photo' => $team->photo,
+                'linked_in' => $team->linked_in,
+                'team_member_roles' => $team->roles->pluck('role_name')->toArray(),
+            ];
+        });
+
+        return response()->json([
+            "draw" => $request->draw,
+            "recordsTotal" => $recordsTotal,
+            "recordsFiltered" => $recordsFiltered,
+            'data' => $data
+        ], 200);
     }
 
 
@@ -125,6 +152,27 @@ class TeamController extends Controller
             'photo' => $photoPath,
             'linked_in' => $request->linked_in,
         ]);
+
+        // Get current roles
+        $currentRoleIds = $team->roles()->pluck('role_id')->toArray();
+
+        // Determine roles to add and remove
+        $newRoleIds = $request->member_roles ?: [];
+        $rolesToAdd = array_diff($newRoleIds, $currentRoleIds);
+        $rolesToRemove = array_diff($currentRoleIds, $newRoleIds);
+
+        // Add new roles
+        foreach ($rolesToAdd as $roleId) {
+            TeamMemberRole::create([
+                'team_member_id' => $team->id,
+                'role_id' => $roleId,
+            ]);
+        }
+
+        // Remove old roles
+        TeamMemberRole::where('team_member_id', $team->id)
+            ->whereIn('role_id', $rolesToRemove)
+            ->delete();
 
         if ($request->ajax()) {
             return response()->json(['success' => 'Member updated successfully.']);
@@ -169,7 +217,7 @@ class TeamController extends Controller
 
     public function showMember($id)
     {
-        $member = Team::find($id);
+        $member = Team::with('roles')->find($id);
 
         if ($member) {
             return response()->json($member);
@@ -177,4 +225,5 @@ class TeamController extends Controller
 
         return response()->json(['error' => 'Member not found.'], 404);
     }
+
 }
