@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'desc',
+        'icon', // Assuming the Service model has a 'name' attribute
+    ];
+
+    public function roles()
+    {
+        return $this->hasMany(Role::class);
+    }
 }

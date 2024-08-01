@@ -18,8 +18,8 @@ class Team extends Model
 
     protected $relations = ['team_member_roles'];
 
-    public function teamMemberRoles()
+    public function roles()
     {
-        return $this->belongsToMany(TeamMemberRole::class, 'team_member_roles');
+        return $this->belongsToMany(Role::class, 'team_member_roles', 'team_member_id', 'role_id');
     }
 }
