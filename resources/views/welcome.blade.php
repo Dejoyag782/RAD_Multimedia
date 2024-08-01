@@ -221,32 +221,29 @@
     <section class="bg-light" id="team">
         <div class="container">
             <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="text-uppercase">RAD Team</h2>
+                    <h3 class="text-muted section-subheading">Meet RAD Clips Media's members</h3>
+                </div>
+            </div>
+            <div class="row">
+                @foreach ($team as $member)
                 <div class="col-sm-4">
-                    <div class="team-member"><img class="rounded-circle mx-auto" src="welcome_assets/img/team/318802872_3421445571510773_8389724998033089710_n.jpg">
+                    <div class="team-member"><img class="rounded-circle mx-auto" src="{{ $member->photo ? asset('storage/'.$member->photo) : 'welcome_assets/img/no-picture.svg' }}">
                         <ul class="list-inline social-buttons" style="margin-top:-40px; margin-right:-100px;">
-                            <li class="list-inline-item" style=" border: white 5px solid; border-radius:50%;"><a href="https://www.linkedin.com/in/dex-joshua-curayag-67764b316/"><i class="fa fa-linkedin"></i></a></li>
+                            <li class="list-inline-item" style=" border: white 5px solid; border-radius:50%;"><a href="{{ $member->linked_in }}"><i class="fa fa-linkedin"></i></a></li>
                         </ul>
-                        <h4>Dex Joshua Curayag</h4>
-                        <p class="text-muted">Videographer | Sound Designer | Video Editor</p>
+                        <h4>{{ $member->name }}</h4>
+                        <p class="text-muted">
+                            @foreach ($member->roles as $role)
+                                {{ $role->role_name }}{{ !$loop->last ? ' | ' : '' }}
+                            @endforeach</p>
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <div class="team-member"><img class="rounded-circle mx-auto" src="welcome_assets/img/team/312658485_3350485938527610_3870889274646053422_n.jpg">
-                        <ul class="list-inline social-buttons" style="margin-top:-40px; margin-right:-100px;">
-                            <li class="list-inline-item" style=" border: white 5px solid; border-radius:50%;"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                        <h4>Rogelio Tasong Jr</h4>
-                        <p class="text-muted">Video Editor | Videographer | Graphic Designer</p>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="team-member"><img class="rounded-circle mx-auto" src="welcome_assets/img/team/93245406_1585567444925506_8528516718580989952_n.jpg">
-                        <ul class="list-inline social-buttons" style="margin-top:-40px; margin-right:-100px;">
-                            <li class="list-inline-item" style=" border: white 5px solid; border-radius:50%;"><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                        <h4>Aleksandr Memphis Olaguir</h4>
-                        <p class="text-muted">Photographer | Graphic Designer | Photo Editor</p>
-                    </div>
+                @endforeach
+                <!-- Pagination links -->
+                <div style="padding:15px; margin-top:20px; min-width:auto; background-color: rgb(33 37 41); display:flex; flex-direction:center; justify-content:center;">
+                        {{ $team->links('vendor.pagination.simple-tailwind') }}
                 </div>
             </div>
         </div>

@@ -72,6 +72,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     Route::get('/', [WelcomeController::class, 'index'])->name('welcome');    
     Route::get('/display-history', [WelcomeController::class, 'displayHistoryData'])->name('displayHistoryData');
+    Route::get('/display-team', [WelcomeController::class, 'displayTeamData'])->name('displayTeamData');
 
     Route::post('/message/store', [WelcomeController::class, 'store'])->name('message.store');
 
