@@ -101,7 +101,7 @@
                 },
                 error: function(response) {
                     // alert('Error fetching user details.');
-                    showNotification('Error fetching user details.');
+                    showNotification('Error fetching user details.', true);
                 }
             });
         });
@@ -134,7 +134,7 @@
                             $('#users_datatable').DataTable().ajax.reload();
                         },
                         error: function(response) {
-                            showNotification(response.responseJSON.error);
+                            showNotification(response.responseJSON.error, true);
                         }
                     });
                 }
@@ -173,7 +173,7 @@ $(document).ready(function() {
                             errorMessage += errors[key] + '\n';
                         }
                     }
-                    showNotification(errorMessage);
+                    showNotification(errorMessage, true);
                 }
             });
         });
@@ -198,7 +198,7 @@ $(document).ready(function() {
                 },
                 error: function(response) {
                     // Handle errors
-                    showNotification(response.error);
+                    showNotification(response.error, true);
                 }
             });
         });

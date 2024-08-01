@@ -55,15 +55,13 @@
                 },
                 {
                     data: 'team_member_roles',
-                    render: function(data) {
-                        if (data === 'ad') {
-                            return 'Admin';
-                        } else if (data === 'mod') {
-                            return 'Moderator';
-                        } else {
-                            return ''; // Handle unexpected cases
+                        render: function (data) {
+                            if (Array.isArray(data) && data.length > 0) {
+                                return '<ul style="list-style-type:disc;">' + data.map(role => `<li>${role}</li>`).join('') + '</ul>';
+                            } else {
+                                return ''; // Handle empty roles
+                            }
                         }
-                    }
                 },
                 {
                     data: null,
@@ -99,8 +97,32 @@
                     $('#teamModal #linked_in').val(response.linked_in);
                     // Assuming response.profile_pic contains the URL of the profile picture
                     var photoUrl = response.photo ? `storage/${response.photo}` : `{{ asset('welcome_assets/img/no-picture.svg')}}`;
-                    // Set the background image of the profile_pic div                    
-                    console.log(response.photo);
+                    // Set the background image of the profile_pic div
+
+                    // Clear existing roles
+                    $('#teamModal #edit_member_roles').empty();
+                    $('#teamModal .choices__list--multiple').empty();
+
+                    var i = 1;
+                    // Populate roles
+                    if (response.roles && response.roles.length > 0) {
+                        response.roles.forEach(function(role) {
+                            $('#teamModal #edit_member_roles').append(`<option value="${role.id}" 
+                                data-custom-properties="[object Object]">${role.role_name}</option>`);
+
+                            $('#teamModal .choices__list--multiple').append(`<div class="choices__item 
+                                choices__item--selectable" data-item="" data-id="${i}" data-value="${role.id}" 
+                                data-custom-properties="[object Object]" aria-selected="true" data-deletable="">${role.role_name}
+                                <button type="button" class="choices__button" aria-label="Remove item: '${role.id}'" data-button="">
+                                Remove item</button></div>`);
+                            console.log(role.id);
+                            i++;
+                        });
+                    } else {
+                        $('#teamModal #edit_member_roles').append('<li>No roles assigned</li>');
+                    }
+                    
+                    $('#teamModal #customFile1').val('');
                     $('#teamModal #selectedImage').css('background-image', `url(${photoUrl})`);
                     $('#editTeamForm').attr('action', '/team/update/' + response.id); // Set form action dynamically
                     
@@ -108,7 +130,7 @@
                 },
                 error: function(response) {
                     // alert('Error fetching team details.');
-                    showNotification('Error fetching member details.');
+                    showNotification('Error fetching member details.', true);
                 }
             });
         });
@@ -141,7 +163,7 @@
                             $('#team_datatable').DataTable().ajax.reload();
                         },
                         error: function(response) {
-                            showNotification(response.responseJSON.error);
+                            showNotification(response.responseJSON.error, true);
                         }
                     });
                 }
@@ -188,7 +210,7 @@
                                 errorMessage += errors[key] + '\n';
                             }
                         }
-                        showNotification(errorMessage);
+                        showNotification(errorMessage, true);
                     }
                 });
             });
@@ -214,11 +236,18 @@
                     $('#team_datatable').DataTable().ajax.reload();
                     showNotification(response.success);
                 },
-                error: function(response) {
-                    // Handle errors
-                    alert('Error Updating Member');
-                    showNotification(response.error);
-                }
+                error: function(xhr) {
+                        // Handle validation errors
+                        var errors = xhr.responseJSON.errors;
+                        var errorMessage = '';
+                        for (var key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                errorMessage += errors[key] + '\n';
+                            }
+                        }
+                        $('.notification ').css('background', 'rgb(239, 213, 213)','important');
+                        showNotification(errorMessage, true);
+                    }
             });
         });
 

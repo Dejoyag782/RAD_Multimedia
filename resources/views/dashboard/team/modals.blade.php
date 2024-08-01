@@ -28,7 +28,7 @@
             </div>
             <div class="form-group">
                 <label for="linked_in">Linked In</label>
-                <input type="text" class="form-control" id="linked_in" name="linked_in" required>
+                <input type="text" class="form-control" id="linked_in" name="linked_in">
             </div>
             <div class="form-group">
                 <label for="edit_member_roles">Member Role/s</label>
@@ -60,7 +60,7 @@
           <h5 class="modal-title" id="addTeamModalLabel"><b>Add Member</b></h5>
           {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
         </div>
-    <form id="addTeamForm" method="POST" action="{{ route('team.store') }}">
+    <form id="addTeamForm" method="POST" action="{{ route('team.store') }}" enctype="multipart/form-data">
         <div class="modal-body">
             @csrf
             <div class="mb-4 d-flex justify-content-left" style="display: flex; justify-content:left !important;
