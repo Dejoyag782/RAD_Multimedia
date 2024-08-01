@@ -21,7 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 document.getElementById('submitBtn').innerText = 'Submit Changes';
                 document.getElementById('selectedImage').style.backgroundImage = `url(${data.photo ? 'storage/' + data.photo : 'https://static.vecteezy.com/system/resources/previews/021/277/888/original/picture-icon-in-flat-design-style-gallery-symbol-illustration-png.png'})`;
-                document.getElementById('timeline').value = data.timeline; // Changed from text to value
+                const timeline = data.timeline;  // Changed from text to value
+                const [selectedMonth, selectedYear] = timeline.split(' ');
+
+                // Set the values of the selectors
+                document.getElementById('monthSelector').value = selectedMonth;
+                document.getElementById('yearSelector').value = selectedYear;
+
                 document.getElementById('title').value = data.title; // Changed from text to value
                 document.getElementById('desc').value = data.desc; // Changed from text to value
             } catch (error) {
@@ -81,13 +87,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     showNotification(data.success);
                 } else {
                     // Error: Handle error (e.g., show error message)
-                    showNotification(data.error);
+                    showNotification(data.error, true);
                 }
             })
             .catch(error => {
             // Handle network or other errors
             console.error('Error deleting history:', error);
-            showNotification('An error occurred. Please try again later.');
+            showNotification('An error occurred. Please try again later.', true);
             });
         }
         });
@@ -95,6 +101,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
 
+});
+
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const currentYear = new Date().getFullYear();
+    const startYear = 1900; // You can adjust the starting year as needed
+    const yearSelector = document.getElementById('yearSelector');
+
+    // Populate the year selector
+    for (let year = currentYear; year >= startYear; year--) {
+        const option = document.createElement('option');
+        option.value = year;
+        option.textContent = year;
+        yearSelector.appendChild(option);
+    }
+
+    // Update text area on change
+    const monthSelector = document.getElementById('monthSelector');
+    const outputTextArea = document.getElementById('timeline');
+
+    function updateTextArea() {
+        const selectedMonth = monthSelector.value;
+        const selectedYear = yearSelector.value;
+        outputTextArea.value = `${selectedMonth} ${selectedYear}`;
+    }
+
+    monthSelector.addEventListener('change', updateTextArea);
+    yearSelector.addEventListener('change', updateTextArea);
 });
 
 

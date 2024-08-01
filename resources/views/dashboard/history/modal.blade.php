@@ -13,7 +13,36 @@
                     
                     <div class="mb-3">
                         <label for="timeline" class="form-label">Timeline</label>
-                        <input type="text" class="form-control" id="timeline" name="timeline" required>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="monthSelector">Select Month</label>
+                                        <select class="form-control" id="monthSelector">
+                                            <option value="January">January</option>
+                                            <option value="February">February</option>
+                                            <option value="March">March</option>
+                                            <option value="April">April</option>
+                                            <option value="May">May</option>
+                                            <option value="June">June</option>
+                                            <option value="July">July</option>
+                                            <option value="August">August</option>
+                                            <option value="September">September</option>
+                                            <option value="October">October</option>
+                                            <option value="November">November</option>
+                                            <option value="December">December</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="yearSelector">Select Year</label>
+                                        <select class="form-control" id="yearSelector">
+                                            <!-- Years will be populated by JavaScript -->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        <input type="text" class="form-control" hidden='true' id="timeline" name="timeline" required>
                     </div>
 
                     <div class="mb-3">
