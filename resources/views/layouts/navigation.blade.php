@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" id="mainNav" class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark">
+<nav x-data="{ open: false }" id="mainNav" class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark" style="padding-top:3px; padding-bottom:3px;">
     <!-- Primary Navigation Menu -->
         <div class="container">
             <div class="flex align-items-center">
