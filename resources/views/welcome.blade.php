@@ -67,30 +67,7 @@
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-md-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-film fa-stack-1x fa-inverse"></i></span>
-                    <h4 class="section-heading">Video Editing</h4>
-                    <p class="text-muted">Our expert video editing services bring your vision to life, whether it's for promotional videos, social media content, or corporate presentations.<br></p>
-                </div>
-                <div class="col-md-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-video-camera fa-stack-1x fa-inverse"></i></span>
-                    <h4 class="section-heading">Videography</h4>
-                    <p class="text-muted">Our videography service captures your moments with precision &amp; creativity. We do corporate events,&nbsp; promotional shoots, weddings &amp; special occasions.<br></p>
-                </div>
-                <div class="col-md-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-camera fa-stack-1x fa-inverse"></i></span>
-                    <h4 class="section-heading">Photography</h4>
-                    <p class="text-muted">Our photography services ensures to capture the essence of every moment. Our photographers do corporate events to portraits and lifestyle shoots.<br></p>
-                </div>
-                <div class="col-md-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-paint-brush fa-stack-1x fa-inverse"></i></span>
-                    <h4 class="section-heading">Graphic Design</h4>
-                    <p class="text-muted">Our team excels in creating eye-catching visuals, from social media graphics to blending artistic flair strategically for stunning &amp; effective designs.<br></p>
-                </div>
-                <div class="col-md-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-microphone fa-stack-1x fa-inverse"></i></span>
-                    <h4 class="section-heading">Sound Design</h4>
-                    <p class="text-muted">Our team of skilled sound designers specializes in creating immersive audio experiences, from custom soundtracks, effects, voiceovers &amp; mixing.<br></p>
-                </div>
-                <div class="col-md-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-pencil fa-stack-1x fa-inverse"></i></span>
-                    <h4 class="section-heading">Song Writing</h4>
-                    <p class="text-muted">Our talented songwriters specialize in crafting original lyrics &amp; melodies across genres, ensuring each composition resonates with your audience<br></p>
-                </div>
+                @include('landing-page-partials.services', ['services' => $service])
             </div>
         </div>
     </section>
