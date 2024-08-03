@@ -195,11 +195,15 @@
                         showNotification(response.success); // You might replace this with a custom notification function
                         // Hide the modal and reset the form
                         $('#addTeamModal .close-modal').click();
+                        
+                        $('#addTeamForm #customFile2').val(''); // Clear file input
+                        $('#addTeamForm #name').val('');        // Clear text input
+                        $('#addTeamForm #linked_in').val('');   // Clear text input
 
-                        $('#addTeamForm')[0].reset();
 
                         // Optionally, refresh your DataTable
                         $('#team_datatable').DataTable().ajax.reload();
+                        // location.reload();
                     },
                     error: function(xhr) {
                         // Handle validation errors

@@ -28,9 +28,7 @@ class TeamController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:20000',
-            'linked_in' => 'required|string|max:255|unique:teams',
-            'member_roles' => 'array', // Ensuring member_roles is provided as an array
-            'member_roles.*' => 'exists:roles,id', // Ensuring each role exists in the roles table    
+            'linked_in' => 'nullable|string|max:255', 
         ]);
 
         $photoPath = null;
@@ -45,13 +43,17 @@ class TeamController extends Controller
             'linked_in' => $request->linked_in,
         ]);
 
-        // Attach roles to the team
-        foreach ($request->member_roles as $roleId) {
-            TeamMemberRole::create([
-                'team_member_id' => $team->id,
-                'role_id' => $roleId,
-            ]);
+        // Check if member_roles is not null and is an array
+        if (!is_null($request->member_roles) && is_array($request->member_roles)) { 
+            // Attach roles to the team
+            foreach ($request->member_roles as $roleId) {
+                TeamMemberRole::create([
+                    'team_member_id' => $team->id,
+                    'role_id' => $roleId,
+                ]);
+            }
         }
+
 
         if ($request->ajax()) {
             return response()->json(['success' => 'Member added successfully.']);
@@ -129,7 +131,7 @@ class TeamController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg|max:20000',
-            'linked_in' => 'required|string|max:255|unique:teams,linked_in,' . $id,
+            'linked_in' => 'nullable|string|max:255',
         ]);
 
         // Handle file upload
@@ -161,13 +163,17 @@ class TeamController extends Controller
         $rolesToAdd = array_diff($newRoleIds, $currentRoleIds);
         $rolesToRemove = array_diff($currentRoleIds, $newRoleIds);
 
-        // Add new roles
-        foreach ($rolesToAdd as $roleId) {
-            TeamMemberRole::create([
-                'team_member_id' => $team->id,
-                'role_id' => $roleId,
-            ]);
+        // Check if rolesToAdd is not null and is an array
+        if (!is_null($rolesToAdd) && is_array($rolesToAdd)) {
+            // Add new roles
+            foreach ($rolesToAdd as $roleId) {
+                TeamMemberRole::create([
+                    'team_member_id' => $team->id,
+                    'role_id' => $roleId,
+                ]);
+            }
         }
+
 
         // Remove old roles
         TeamMemberRole::where('team_member_id', $team->id)
@@ -180,9 +186,6 @@ class TeamController extends Controller
 
         return redirect()->route('team')->with('success', 'Member updated successfully.');
     }
-
-
-    
 
 
     public function deleteMember(Request $request)
@@ -200,10 +203,10 @@ class TeamController extends Controller
                 Storage::disk('public')->delete($ProfilePicPath);
 
                 // Log successful deletion
-                Log::info("Deleted old profile picture: {$ProfilePicPath}");
+                // Log::info("Deleted old profile picture: {$ProfilePicPath}");
             } else {
                 // Log if file doesn't exist
-                Log::warning("Old profile picture not found in storage: {$ProfilePicPath}");
+                // Log::warning("Old profile picture not found in storage: {$ProfilePicPath}");
             }
         }
 
@@ -214,6 +217,7 @@ class TeamController extends Controller
 
     return response()->json(['error' => 'Member not found.'], 404);
     }
+    
 
     public function showMember($id)
     {

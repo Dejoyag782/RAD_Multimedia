@@ -83,7 +83,7 @@
             </div>
             <div class="form-group">
                 <label for="linked_in">Linked In</label>
-                <input type="text" class="form-control" id="linked_in" name="linked_in" required>
+                <input type="text" class="form-control" id="linked_in" name="linked_in">
             </div>
             <div class="form-group">
                 <label for="member_roles">Member Role/s</label>
