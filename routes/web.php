@@ -9,9 +9,7 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\TeamController;
-
-// Middlewares
-use App\Http\Middleware\CheckAdminRole;
+use App\Http\Controllers\ServiceController;
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -21,10 +19,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/dashboard', [DashController::class, 'index'])->name('dashboard');
 
-
-    Route::get('/services', function () {
-        return view('dashboard.services.index');
-    })->name('services');
+    Route::get('/services', [ServiceController::class, 'index'])->name('services');    
+    Route::get('/get-service', [ServiceController::class, 'getServiceData'])->name('getServiceData');
+    Route::post('/service/store-or-update', [ServiceController::class, 'storeOrUpdate'])->name('service.storeOrUpdate');   
+    Route::delete('/destroy-service/{serviceId}', [ServiceController::class, 'destroyService'])->name('service.destroy');
+    Route::get('/service/{id}', [ServiceController::class, 'showService']);  
 
     Route::get('/portfolio', function () {
         return view('dashboard.portfolio.index');
@@ -72,8 +71,8 @@ Route::middleware(['auth','isAdmin'])->group(function () {
 
     Route::get('/', [WelcomeController::class, 'index'])->name('welcome');    
     Route::get('/display-history', [WelcomeController::class, 'displayHistoryData'])->name('displayHistoryData');
-    Route::get('/display-team', [WelcomeController::class, 'displayTeamData'])->name('displayTeamData');
-
+    Route::get('/display-team', [WelcomeController::class, 'displayTeamData'])->name('displayTeamData');    
+    Route::get('/display-service', [WelcomeController::class, 'displayServiceData'])->name('displayServiceData');
     Route::post('/message/store', [WelcomeController::class, 'store'])->name('message.store');
 
 Route::middleware('auth')->group(function () {
