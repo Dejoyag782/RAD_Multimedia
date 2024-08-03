@@ -1,5 +1,62 @@
 <x-app-layout>
     <x-slot name="header">
+        <style>
+            /* Favicon Selector */
+            .favicon-option {
+            font-size: 2em;
+            cursor: pointer;
+            padding: 10px;
+            }
+            .favicon-option.selected {
+            border: 2px solid blue;
+            border-radius: 5px;
+            }
+            /* Roles Adder */
+            #roleInput {
+                margin-bottom: 10px;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+
+            #addRoleBtn:hover {
+                background-color: #f1c40f; /* Lighter yellow on hover */
+            }
+
+            #roleContainer {
+                margin-top: 10px;
+                Background-color: rgb(200, 200, 200);
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+            .roleCapsule {
+                display: inline-block;
+                padding: 5px 10px;
+                margin: 5px;
+                background-color: #1f2937; /* Black */
+                color: #fff; /* White */
+                border-radius: 15px;
+                font-size: 14px;
+                position: relative;
+            }
+
+            .roleCapsule .deleteBtn {
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 0 5px;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 12px;
+                background-color: #fbc531; /* Yellow */
+                color: #1f2937; /* Black */
+                border-radius: 50%;
+            }
+
+        </style>
+        
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Dashboard') }}
         </h2>
@@ -16,38 +73,21 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-lg-12 text-center">
-                                        <h2 class="text-uppercase text-start section-heading" style="text-align: left;">Services</h2>
-                                        <h3 class="text-muted section-subheading" style="font-size: 20px;text-align: left;margin-bottom: 30pxpx;">Add, Edit or Remove | Services</h3>
+                                        <h4 class="text-uppercase text-start section-heading d-flex justify-content-between" style="text-align: left;">Services
+                                            <a id="addServiceBtn" class="btn add-service-btn" style="background-color:#212529; color: rgb(249, 242, 242);" data-bs-toggle="modal" data-bs-target="#ServiceModal">
+                                                <i id="toggleIcon" class="fa fa-user" style="padding-right:5px;"></i>Add Service
+                                            </a>
+                                        </h4>
+                                        <h5 class="text-muted section-subheading" style="font-size: 20px;text-align: left;margin-bottom: 30pxpx;">Add, Edit or Remove | Services</h5>
                                     </div>
                                 </div>
+                                
+                                <hr style="margin-top:20px; margin-bottom:20px;">
+
                                 <div class="row text-center">
-                                    <div class="col-md-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-film fa-stack-1x fa-inverse"></i></span>
-                                        <h4 class="section-heading">Video Editing</h4>
-                                        <p class="text-muted">Our expert video editing services bring your vision to life, whether it's for promotional videos, social media content, or corporate presentations.<br></p>
-                                    </div>
-                                    <div class="col-md-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-video-camera fa-stack-1x fa-inverse"></i></span>
-                                        <h4 class="section-heading">Videography</h4>
-                                        <p class="text-muted">Our videography service captures your moments with precision &amp; creativity. We do corporate events,&nbsp; promotional shoots, weddings &amp; special occasions.<br></p>
-                                    </div>
-                                    <div class="col-md-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-camera fa-stack-1x fa-inverse"></i></span>
-                                        <h4 class="section-heading">Photography</h4>
-                                        <p class="text-muted">Our photography services ensures to capture the essence of every moment. Our photographers do corporate events to portraits and lifestyle shoots.<br></p>
-                                    </div>
-                                    <div class="col-md-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-paint-brush fa-stack-1x fa-inverse"></i></span>
-                                        <h4 class="section-heading">Graphic Design</h4>
-                                        <p class="text-muted">Our team excels in creating eye-catching visuals, from social media graphics to blending artistic flair strategically for stunning &amp; effective designs.<br></p>
-                                    </div>
-                                    <div class="col-md-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-microphone fa-stack-1x fa-inverse"></i></span>
-                                        <h4 class="section-heading">Sound Design</h4>
-                                        <p class="text-muted">Our team of skilled sound designers specializes in creating immersive audio experiences, from custom soundtracks, effects, voiceovers &amp; mixing.<br></p>
-                                    </div>
-                                    <div class="col-md-4"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-pencil fa-stack-1x fa-inverse"></i></span>
-                                        <h4 class="section-heading">Song Writing</h4>
-                                        <p class="text-muted">Our talented songwriters specialize in crafting original lyrics &amp; melodies across genres, ensuring each composition resonates with your audience<br></p>
-                                    </div>
-                                </div>
-                                <div class="row text-center">
-                                    <div class="col text-center d-xxl-flex justify-content-xxl-center align-items-xxl-center"><button class="btn btn-primary d-xxl-flex align-items-xxl-center" type="button" style="margin-bottom: 75px;margin-top: 75px;min-width: 30px;min-height: 30px;font-size: 30pt;"><i class="fa fa-plus" style="font-size: 40pt;"></i>&nbsp;Add a Service</button></div>
+
+                                    @include('dashboard.services.listview')
+                                    
                                 </div>
                             </div>
                         </section>
@@ -56,4 +96,8 @@
                 </div>
             </div>
         </div>
+
+        @include('dashboard.services.modal')        
+        @include('dashboard.services.favicon-selector-modal')
+        @include('dashboard.services.ajax')
 </x-app-layout>
