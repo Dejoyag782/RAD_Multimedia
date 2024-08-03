@@ -23,7 +23,7 @@
                                 <div class="row text-center">
                                     <div class="col-md-3"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-briefcase fa-stack-1x fa-inverse"></i></span>
                                         <h4 class="section-heading">SERVICES</h4>
-                                        <p class="text-muted">6<br></p>
+                                        <p class="text-muted">{{ $serviceCount }}<br></p>
                                     </div>
                                     <div class="col-md-3"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-folder-open fa-stack-1x fa-inverse"></i></span>
                                         <h4 class="section-heading">PROJECTS</h4>
@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="col-md-3"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-users fa-stack-1x fa-inverse"></i></span>
                                         <h4 class="section-heading">TEAM</h4>
-                                        <p class="text-muted">3<br></p>
+                                        <p class="text-muted">{{ $teamCount }}<br></p>
                                     </div>
                                     <div class="col-md-3"><span class="fa-stack fa-4x"><i class="fa fa-circle fa-stack-2x text-primary"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span>
                                         <h4 class="section-heading">MESSAGES</h4>
