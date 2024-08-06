@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\PortfolioController;
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
@@ -24,10 +25,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/service/store-or-update', [ServiceController::class, 'storeOrUpdate'])->name('service.storeOrUpdate');   
     Route::delete('/destroy-service/{serviceId}', [ServiceController::class, 'destroyService'])->name('service.destroy');
     Route::get('/service/{id}', [ServiceController::class, 'showService']);  
-
-    Route::get('/portfolio', function () {
-        return view('dashboard.portfolio.index');
-    })->name('portfolio');
+    
+    Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
 
     Route::get('/history', [HistoryController::class, 'index'])->name('history');
     Route::get('/get-history', [HistoryController::class, 'getHistoryData'])->name('getHistoryData');
@@ -49,11 +48,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/archive-message', [MessageController::class, 'archiveMessage'])->name('archiveMessage');    
     Route::post('/delete-message', [MessageController::class, 'deleteMessage'])->name('deleteMessage');
     Route::get('/messages/{id}', [MessageController::class, 'showMessage']);
-
-    
-
-
-
 
 });
 

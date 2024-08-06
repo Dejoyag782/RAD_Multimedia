@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Service;
 use App\Models\Role;
+use App\Models\Portfolio;
 
 class ServiceController extends Controller
 {
@@ -28,6 +30,8 @@ class ServiceController extends Controller
         'icon' => 'required|string',
         'roles' => 'nullable|array',
         'roles.*' => 'string|max:255',
+        'sub_header' => 'required|string',
+        'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:5000',
     ]);
 
     $data = $request->only(['name', 'desc','icon']);
@@ -40,6 +44,12 @@ class ServiceController extends Controller
     //     // Create new timeline
     //     Service::create($data);
     // }
+
+    // Handle file upload for the thumbnail
+    $thumbnailPath = null;
+    if ($request->hasFile('thumbnail')) {
+        $thumbnailPath = $request->file('thumbnail')->store('thumbnails', 'public');
+    }
 
     if ($request->filled('id')) {
         // Update existing service
@@ -106,6 +116,30 @@ class ServiceController extends Controller
         } else {
             Log::error('Roles data is not an array or string.');
         }
+
+        // Update portfolio if it exists
+        $portfolio = Portfolio::where('service_id', $service->id)->first();
+        if ($portfolio) {
+            $portfolio->sub_header = $request->sub_header;
+
+            // Check if a new thumbnail is uploaded and delete the old one if it exists
+            if ($thumbnailPath) {
+                if ($portfolio->thumbnail) {
+                    Storage::disk('public')->delete($portfolio->thumbnail);
+                }
+                $portfolio->thumbnail = $thumbnailPath;
+            }
+
+            $portfolio->save();
+        } else {
+            // Create a new portfolio entry if it doesn't exist
+            $portfolio = new Portfolio();
+            $portfolio->service_id = $service->id;
+            $portfolio->sub_header = $request->sub_header;
+            $portfolio->thumbnail = $thumbnailPath;
+            $portfolio->save();
+        }
+        
     }  
      else {
         // Create new service
@@ -147,6 +181,13 @@ class ServiceController extends Controller
         } else {
             Log::error('Roles data is not an array or string.');
         }
+
+        // Create the portfolio entry
+        $portfolio = new Portfolio();
+        $portfolio->service_id = $service->id;
+        $portfolio->sub_header = $request->sub_header;
+        $portfolio->thumbnail = $thumbnailPath;
+        $portfolio->save();
     }
 
     return redirect('/services')->with('success', 'Service saved successfully!');
@@ -154,7 +195,7 @@ class ServiceController extends Controller
 
     public function showService($id)
     {
-        $service = Service::with('roles')->findOrFail($id);
+        $service = Service::with('roles', 'portfolios')->findOrFail($id);
 
         return response()->json($service);
     }

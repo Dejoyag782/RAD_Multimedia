@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let rolesArray = [];
 
                 if (data.roles && data.roles.length > 0) {
-                    console.log('Roles received:', data.roles); // Log the roles data
+                    // console.log('Roles received:', data.roles); // Log the roles data
                     data.roles.forEach(role => {
                         // Create a new role capsule
                         const roleCapsule = document.createElement('div');
@@ -75,7 +75,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 rolesInput.value = JSON.stringify(rolesArray); // Use JSON.stringify to serialize the array
             
-                
+                // Display portfolio
+                const subHeaderInput = document.getElementById('sub_header');
+                const selectedImage = document.getElementById('selectedImage');
+                console.log(data.portfolios[0]);
+                if (data.portfolios && data.portfolios.length > 0) {
+                    const portfolio = data.portfolios[0]; // Assuming one portfolio per service
+                    subHeaderInput.value = portfolio.sub_header;
+                    
+                    if (portfolio.thumbnail) {
+                        selectedImage.style.backgroundImage = `url({{ asset('storage/${portfolio.thumbnail}') }})` ;
+                    }
+                } else {
+                    subHeaderInput.value = '';
+                    selectedImage.style.backgroundImage = `url('https://static.vecteezy.com/system/resources/previews/021/277/888/original/picture-icon-in-flat-design-style-gallery-symbol-illustration-png.png')`;
+                }
+
             } catch (error) {
                 console.error('Fetch error:', error);
             }
@@ -91,9 +106,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('serviceModalLabel').innerText = 'Add New Service';
                 document.getElementById('faviconPreview').setAttribute('class', 'fa fa-question-circle fa-stack-1x fa-inverse');
                 document.getElementById('submitBtn').innerText = 'Add Service';             
-                document.getElementById('selectedFavicon').value = 'fa-question-circle';
-                document.getElementById('name').value = ''; // Changed from text to value
-                document.getElementById('desc').value = ''; // Changed from text to value
+                document.getElementById('selectedFavicon').value = 'fa-question-circle';                
+                const selectedImage = document.getElementById('selectedImage');
+                document.getElementById('sub_header').value = '';
+                selectedImage.style.backgroundImage = `url('https://static.vecteezy.com/system/resources/previews/021/277/888/original/picture-icon-in-flat-design-style-gallery-symbol-illustration-png.png')`;
+                document.getElementById('name').value = '';
+                document.getElementById('desc').value = '';
 
                 const rolesContainer = document.getElementById('roleContainer');
                 rolesContainer.innerHTML = ''; // Clear existing roles

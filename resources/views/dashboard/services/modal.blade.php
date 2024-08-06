@@ -39,6 +39,29 @@
                         <div id="roleContainer"></div>
                     </div>
 
+                    <br>
+                    <hr>
+                    <br>
+
+                    <div class="mb-3">
+                        <label for="sub_header" class="form-label">Portfolio Sub Header</label>
+                        <input type="text" class="form-control" id="sub_header" name="sub_header" placeholder="Add 1 word sub header" />
+                    </div>
+            
+                    <div>
+                        <x-input-label for="photo" :value="__('Portfolio Thumbnail')" />
+                        <div class="mb-4 d-flex justify-content-left" style="display: flex; justify-content:left !important; max-height: 200px!important; min-width:200px!important; max-width:250px!important;">
+                            <div id="selectedImage" class="rounded-circle mx-auto" style="background-size: cover, auto; no-repeat; min-height: 200px!important; min-width:200px!important; max-width:250px!important; max-height:250px!important; background-image: url('https://static.vecteezy.com/system/resources/previews/021/277/888/original/picture-icon-in-flat-design-style-gallery-symbol-illustration-png.png');">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-right">
+                            <div data-mdb-ripple-init class="btn btn-primary btn-rounded">
+                                <label class="form-label text-white m-1" for="customFile1">Choose Photo</label>
+                                <input type="file" name="thumbnail" class="form-control d-none" accept=".png, .jpg, .jpeg" id="customFile1" onchange="displaySelectedImage(event, 'selectedImage')" />
+                            </div>
+                        </div>
+                    </div>
+
                 <div class="modal-footer">
                     <button type="submit" id='submitBtn' class="btn btn-primary">Add Timeline</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
