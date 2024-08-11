@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
             $table->json('project_team_ids')->default('[]');
             $table->string('file_type');
-            $table->string('file_path');
+            $table->string('file_path')->nullable();
             $table->string('project_name');
             $table->string('sub_heading');
             $table->string('desc');
