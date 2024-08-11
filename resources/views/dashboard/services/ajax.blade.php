@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 } else {
                     subHeaderInput.value = '';
-                    selectedImage.style.backgroundImage = `url('https://static.vecteezy.com/system/resources/previews/021/277/888/original/picture-icon-in-flat-design-style-gallery-symbol-illustration-png.png')`;
+                    selectedImage.style.backgroundImage = `url('{{asset('welcome_assets/img/no-image.png')}}')`;
                 }
 
             } catch (error) {
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('selectedFavicon').value = 'fa-question-circle';                
                 const selectedImage = document.getElementById('selectedImage');
                 document.getElementById('sub_header').value = '';
-                selectedImage.style.backgroundImage = `url('https://static.vecteezy.com/system/resources/previews/021/277/888/original/picture-icon-in-flat-design-style-gallery-symbol-illustration-png.png')`;
+                selectedImage.style.backgroundImage = `url('{{asset('welcome_assets/img/no-image.png')}}')`;
                 document.getElementById('name').value = '';
                 document.getElementById('desc').value = '';
 

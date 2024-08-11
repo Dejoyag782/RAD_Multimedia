@@ -24,66 +24,7 @@
                                 <hr style="margin-top:20px; margin-bottom:20px;">
 
                                 <div class="row">
-                                    <div class="col-sm-6 col-md-4 portfolio-item"><a class="portfolio-link" href="#portfolioModal1" data-bs-toggle="modal">
-                                            <div class="portfolio-hover">
-                                                <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
-                                            </div><img class="img-fluid" src="welcome_assets/img/portfolio/Video%20Editing.png">
-                                        </a>
-                                        <div class="portfolio-caption">
-                                            <h4>Clips</h4>
-                                            <p class="text-muted">Video Edits</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 portfolio-item"><a class="portfolio-link" href="#portfolioModal2" data-bs-toggle="modal">
-                                            <div class="portfolio-hover">
-                                                <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
-                                            </div><img class="img-fluid" src="welcome_assets/img/portfolio/Videography.png">
-                                        </a>
-                                        <div class="portfolio-caption">
-                                            <h4>Shoot</h4>
-                                            <p class="text-muted">Videography</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 portfolio-item"><a class="portfolio-link" href="#portfolioModal3" data-bs-toggle="modal">
-                                            <div class="portfolio-hover">
-                                                <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
-                                            </div><img class="img-fluid" src="welcome_assets/img/portfolio/3-thumbnail.jpg">
-                                        </a>
-                                        <div class="portfolio-caption">
-                                            <h4>Window</h4>
-                                            <p class="text-muted">Photography</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 portfolio-item"><a class="portfolio-link" href="#portfolioModal4" data-bs-toggle="modal">
-                                            <div class="portfolio-hover">
-                                                <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
-                                            </div><img class="img-fluid" src="welcome_assets/img/portfolio/graphics%20design.png">
-                                        </a>
-                                        <div class="portfolio-caption">
-                                            <h4><strong>Explore</strong><br></h4>
-                                            <p class="text-muted">Graphic Design</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 portfolio-item"><a class="portfolio-link" href="#portfolioModal5" data-bs-toggle="modal">
-                                            <div class="portfolio-hover">
-                                                <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
-                                            </div><img class="img-fluid" src="welcome_assets/img/portfolio/serum-3d-665x499.jpg">
-                                        </a>
-                                        <div class="portfolio-caption">
-                                            <h4>Blast</h4>
-                                            <p class="text-muted">Sound Design</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6 col-md-4 portfolio-item"><a class="portfolio-link" href="#portfolioModal6" data-bs-toggle="modal">
-                                            <div class="portfolio-hover">
-                                                <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
-                                            </div><img class="img-fluid" src="welcome_assets/img/portfolio/Song%20Writing.png">
-                                        </a>
-                                        <div class="portfolio-caption">
-                                            <h4>Lyric</h4>
-                                            <p class="text-muted">Song Writing</p>
-                                        </div>
-                                    </div>
+                                    @include('dashboard.portfolio.listview')
                                 </div>
                             </div>
                         </section>
@@ -92,4 +33,9 @@
                 </div>
             </div>
         </div>
+
+        @include('dashboard.portfolio.portfolio-modal')
+        @include('dashboard.portfolio.project-modal')
+        @include('dashboard.portfolio.ajax')
+
 </x-app-layout>

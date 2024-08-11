@@ -31,7 +31,7 @@ class ServiceController extends Controller
         'roles' => 'nullable|array',
         'roles.*' => 'string|max:255',
         'sub_header' => 'required|string',
-        'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:5000',
+        'thumbnail' => 'nullable|image|mimes:jpg,jpeg,png|max:50000',
     ]);
 
     $data = $request->only(['name', 'desc','icon']);

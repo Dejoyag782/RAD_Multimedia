@@ -50,8 +50,11 @@
             
                     <div>
                         <x-input-label for="photo" :value="__('Portfolio Thumbnail')" />
-                        <div class="mb-4 d-flex justify-content-left" style="display: flex; justify-content:left !important; max-height: 200px!important; min-width:200px!important; max-width:250px!important;">
-                            <div id="selectedImage" class="rounded-circle mx-auto" style="background-size: cover, auto; no-repeat; min-height: 200px!important; min-width:200px!important; max-width:250px!important; max-height:250px!important; background-image: url('https://static.vecteezy.com/system/resources/previews/021/277/888/original/picture-icon-in-flat-design-style-gallery-symbol-illustration-png.png');">
+                        <div class="mb-4 d-flex justify-content-center" style="display: flex; justify-content:center !important; max-height: auto !important; min-width:100% !important; max-width:250px!important;">
+                            <div>
+                                <div class="img-fluid" id="selectedImage" style="margin:auto; background-size: 100% 100% ; background-repeat: no-repeat; background-image: url('https://static.vecteezy.com/system/resources/previews/021/277/888/original/picture-icon-in-flat-design-style-gallery-symbol-illustration-png.png');">
+                                    <img class="img-fluid" src="welcome_assets/img/portfolio/Blank_canvas.png">
+                                </div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-right">
