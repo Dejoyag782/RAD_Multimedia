@@ -26,7 +26,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/destroy-service/{serviceId}', [ServiceController::class, 'destroyService'])->name('service.destroy');
     Route::get('/service/{id}', [ServiceController::class, 'showService']);  
     
-    Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');
+    Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio');    
+    // Route::post('/project/store', [PortfolioController::class, 'store'])->name('project.store');    
+    Route::post('/project/store-or-update', [PortfolioController::class, 'storeOrUpdate'])->name('project.storeOrUpdate'); 
+    Route::get('/getProjectsByService/{service_id}', [PortfolioController::class, 'getProjectsByService']);
+    Route::post('/delete-project', [PortfolioController::class, 'deleteProject'])->name('deleteProject');        
+    Route::get('/project/{id}', [PortfolioController::class, 'showProject'])->name('project.show');
+
 
     Route::get('/history', [HistoryController::class, 'index'])->name('history');
     Route::get('/get-history', [HistoryController::class, 'getHistoryData'])->name('getHistoryData');
