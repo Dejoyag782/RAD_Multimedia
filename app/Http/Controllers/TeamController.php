@@ -79,10 +79,10 @@ class TeamController extends Controller
         $query = Team::with('roles')->select(['id', 'name', 'photo', 'linked_in']);
 
         // Search
-        $search = $request->search['value'] ?? null;
-        if ($search) {
-            $query->where('name', 'like', "%" . $search . "%");
-        }
+        $search = $request->search;
+        $query = $query->where(function($query) use ($search) {
+            $query->orWhere('name', 'like', "%".$search."%");
+        });
 
         $orderByName = 'name';
         switch ($orderColumnIndex) {
