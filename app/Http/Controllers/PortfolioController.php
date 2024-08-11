@@ -72,22 +72,27 @@ class PortfolioController extends Controller
 
         $filePath = null;
         if ($request->file_type == 'Link') {
-            $file = PortfolioFiles::find($request->id);
+            if ($request->id !== null){
+                $file = PortfolioFiles::find($request->id);
                 // Handle file upload
-            $oldFilePath = $file->file_path; 
-            if ($oldFilePath && Storage::disk('public')->exists($oldFilePath)) {
-            Storage::disk('public')->delete($oldFilePath);
+                $oldFilePath = $file->file_path; 
+                if ($oldFilePath && Storage::disk('public')->exists($oldFilePath)) {
+                Storage::disk('public')->delete($oldFilePath);
+                }
             }
             $filePath = $request->file_path;
             
         } 
         else if ($request->file_type == 'Audio'){
             if ($request->hasFile('file_path')) {
-                $file = PortfolioFiles::find($request->id);
-                // Handle file upload
-                $filePath = $file->file_path; 
-                if ($filePath && Storage::disk('public')->exists($filePath)) {
-                Storage::disk('public')->delete($filePath);
+
+                if ($request->id !== null){
+                    $file = PortfolioFiles::find($request->id);
+                    // Handle file upload
+                    $filePath = $file->file_path; 
+                    if ($filePath && Storage::disk('public')->exists($filePath)) {
+                    Storage::disk('public')->delete($filePath);
+                    }
                 }
 
                 $randomName = Str::random(10); // Generate a 10-character random string
@@ -105,11 +110,13 @@ class PortfolioController extends Controller
         }
         else{
             if ($request->hasFile('file_path')) {
-                $file = PortfolioFiles::find($request->id);
-                // Handle file upload
-                $filePath = $file->file_path; 
-                if ($filePath && Storage::disk('public')->exists($filePath)) {
-                Storage::disk('public')->delete($filePath);
+                if ($request->id !== null){
+                    $file = PortfolioFiles::find($request->id);
+                    // Handle file upload
+                    $filePath = $file->file_path; 
+                    if ($filePath && Storage::disk('public')->exists($filePath)) {
+                    Storage::disk('public')->delete($filePath);
+                    }
                 }
                 $filePath = $request->file('file_path')->store('public/projects');
                 $filePath = str_replace('public/', '', $filePath); // Remove 'public/' from the path

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Messages;
+use App\Models\Message;
 use App\Models\History;
 use App\Models\Team;
 use App\Models\TeamMemberRole;
 use App\Models\Role;
 use App\Models\Service;
+use App\Models\Portfolio;
+use App\Models\PortfolioFiles;
 
 class WelcomeController extends Controller
 {
@@ -23,8 +25,9 @@ class WelcomeController extends Controller
         $histories = History::orderBy('id', 'asc')->paginate($perFive);
         $team = Team::orderBy('id','asc')->paginate($perSix);
         $service = Service::orderBy('id','asc')->paginate($perSix);
+        $portfolios = Portfolio::orderBy('id')->with('service')->paginate($perSix);
         
-        return view('welcome', compact('histories','team','service'));
+        return view('welcome', compact('histories','team','service','portfolios'));
     }
     
     public function store(Request $request)
@@ -36,7 +39,7 @@ class WelcomeController extends Controller
             'desc' => 'required|string',
         ]);
 
-        $contact = Messages::create([
+        $contact = Message::create([
             'name' => $validatedData['name'],
             'email' => $validatedData['email'],
             'phone' => $validatedData['phone'],
@@ -68,4 +71,31 @@ class WelcomeController extends Controller
         $service = Team::orderBy('id','desc')->paginate($perService);
         return response()->json($service);
     }
+
+    public function displayProjectsByService($serviceId)
+    {
+        $query = PortfolioFiles::where('service_id', $serviceId);
+
+        // Handle search query
+        if (request()->has('search') && request()->search != '') {
+            $search = request()->search;
+            $query->where(function($q) use ($search) {
+                $q->where('project_name', 'LIKE', "%{$search}%")
+                ->orWhere('client', 'LIKE', "%{$search}%")
+                ->orWhere('date', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $projects = $query->paginate(9); // Adjust the number to however many items per page
+
+        $serviceName = Service::find($serviceId)->name;
+
+        return response()->json([
+            'service_name' => $serviceName,
+            'data' => $projects->items(),
+            'pagination' => (string) $projects->links('pagination::bootstrap-4'), // Adjust as needed
+        ]);
+    }
+
+
 }
