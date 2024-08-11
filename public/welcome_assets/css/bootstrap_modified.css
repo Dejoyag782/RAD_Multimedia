@@ -25,6 +25,11 @@
  text-align: left !important;
 }
 
+.page-link {
+  padding: .375rem .75rem;
+  background-color: #343a40;
+}
+
 /* Datatables Modifications */
 .dataTables_paginate{
     display: flex !important;

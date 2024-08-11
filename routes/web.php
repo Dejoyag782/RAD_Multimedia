@@ -73,6 +73,7 @@ Route::middleware(['auth','isAdmin'])->group(function () {
     Route::get('/display-history', [WelcomeController::class, 'displayHistoryData'])->name('displayHistoryData');
     Route::get('/display-team', [WelcomeController::class, 'displayTeamData'])->name('displayTeamData');    
     Route::get('/display-service', [WelcomeController::class, 'displayServiceData'])->name('displayServiceData');
+    Route::get('/displayProjectsByService/{service_id}', [WelcomeController::class, 'displayProjectsByService']);
     Route::post('/message/store', [WelcomeController::class, 'store'])->name('message.store');
 
 Route::middleware('auth')->group(function () {

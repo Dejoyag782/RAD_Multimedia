@@ -210,7 +210,8 @@
                     
                     $('#ProjectModal #sub_heading').val(response.sub_heading);                    
                     $('#ProjectModal #desc').val(response.desc);                    
-                    $('#ProjectModal #client').val(response.client);
+                    $('#ProjectModal #client').val(response.client);                    
+                    $('#ProjectModal #date').val(response.date);
 
                     // Clear existing roles
                     $('#ProjectModal #select_team_ids').empty();
@@ -256,6 +257,7 @@
                     // Set the values of the selectors
                     document.getElementById('monthSelector').value = selectedMonth;
                     document.getElementById('yearSelector').value = selectedYear;
+                    console.log(response.date);
                    
 
                 },
@@ -284,7 +286,18 @@
                     
 
                     // Show a success notification
-                    
+                    $('#ProjectModal #id').val('');
+                    $('#ProjectModal #project_name').val('');
+                    $('#ProjectModal #file_type').val('');
+                    $('#ProjectModal #fileTypeSelect').val('');
+                    $('#ProjectModal #fileInputContainer').empty();
+                    $('#ProjectModal #sub_heading').val('');                    
+                    $('#ProjectModal #desc').val('');                    
+                    $('#ProjectModal #client').val('');                    
+                    $('#ProjectModal #date').val('');
+                    // Clear existing team
+                    $('#ProjectModal #select_team_ids').empty();
+                    $('#ProjectModal .choices__list--multiple').empty();
                     showNotification(response.success); // You might replace this with a custom notification function
                     // Hide the modal and reset the form
                     $('#ProjectModal .close_modal').click();

@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     
     <meta name="description" content="RAD Clips Media offers a comprehensive suite of creative services including videography, video editing, photography, sound design, graphic design, and songwriting. Whether you're seeking stunning visuals, immersive soundscapes, or captivating designs, our talented team brings expertise and passion to every project. Elevate your brand with RAD Clips Media – where creativity meets craftsmanship.">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
@@ -14,7 +15,8 @@
     <link rel="stylesheet" href="{{asset('welcome_assets/fonts/font-awesome.min.css')}}">    
     <link rel="stylesheet" href="{{asset('welcome_assets/fonts/ionicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('welcome_assets/css/app.css')}}">
-    <link rel="stylesheet" href="{{asset('welcome_assets/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('welcome_assets/css/bootstrap.min.css')}}">    
+    <link rel="stylesheet" href="{{asset('welcome_assets/css/bootstrap_modified.css')}}">
     <link rel="stylesheet" href="{{asset('welcome_assets/css/Highlight-Blue.css')}}">
     <link rel="stylesheet" href="{{asset('welcome_assets/css/Login-Form-Dark.css')}}">
     <link rel="stylesheet" href="{{asset('welcome_assets/css/untitled.css')}}">
@@ -25,6 +27,9 @@
     <script src="{{asset('welcome_assets/js/bootstrap.js')}}"></script>
     <script src="{{asset('welcome_assets/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('welcome_assets/js/bs-init.js')}}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
 
     
 
@@ -80,66 +85,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6 col-md-4 portfolio-item"><a class="portfolio-link" href="#portfolioModal1" data-bs-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="welcome_assets/img/portfolio/Video%20Editing.png">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Clips</h4>
-                        <p class="text-muted">Video Edits</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 portfolio-item"><a class="portfolio-link" href="#portfolioModal2" data-bs-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="welcome_assets/img/portfolio/Videography.png">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Shoot</h4>
-                        <p class="text-muted">Videography</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 portfolio-item"><a class="portfolio-link" href="#portfolioModal3" data-bs-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="welcome_assets/img/portfolio/3-thumbnail.jpg">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Window</h4>
-                        <p class="text-muted">Photography</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 portfolio-item"><a class="portfolio-link" href="#portfolioModal4" data-bs-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="welcome_assets/img/portfolio/graphics%20design.png">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4><strong>Explore</strong><br></h4>
-                        <p class="text-muted">Graphic Design</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 portfolio-item"><a class="portfolio-link" href="#portfolioModal5" data-bs-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="welcome_assets/img/portfolio/serum-3d-665x499.jpg">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Blast</h4>
-                        <p class="text-muted">Sound Design</p>
-                    </div>
-                </div>
-                <div class="col-sm-6 col-md-4 portfolio-item"><a class="portfolio-link" href="#portfolioModal6" data-bs-toggle="modal">
-                        <div class="portfolio-hover">
-                            <div class="portfolio-hover-content"><i class="fa fa-plus fa-3x"></i></div>
-                        </div><img class="img-fluid" src="welcome_assets/img/portfolio/Song%20Writing.png">
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4>Lyric</h4>
-                        <p class="text-muted">Song Writing</p>
-                    </div>
-                </div>
+                @include('landing-page-partials.portfolios', ['portfolios' => $portfolios])
             </div>
         </div>
     </section>
@@ -255,94 +201,9 @@
             </div>
         </div>
     </div>
-    <div class="modal fade text-center portfolio-modal" role="dialog" tabindex="-1" id="portfolioModal2">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 mx-auto">
-                            <div class="modal-body">
-                                <h2 class="text-uppercase">Project Name</h2>
-                                <p class="text-muted item-intro">Lorem ipsum dolor sit amet consectetur.</p><img class="img-fluid d-block mx-auto" src="welcome_assets/img/portfolio/2-full.jpg">
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                <ul class="list-unstyled">
-                                    <li>Date: January 2017</li>
-                                    <li>Client: Threads</li>
-                                    <li>Category: Illustration</li>
-                                </ul><button class="btn btn-primary" type="button" data-bs-dismiss="modal"><i class="fa fa-times"></i><span>&nbsp;Close Project</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade text-center portfolio-modal" role="dialog" tabindex="-1" id="portfolioModal3">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 mx-auto">
-                            <div class="modal-body">
-                                <h2 class="text-uppercase">Project Name</h2>
-                                <p class="text-muted item-intro">Lorem ipsum dolor sit amet consectetur.</p><img class="img-fluid d-block mx-auto" src="welcome_assets/img/portfolio/3-full.jpg">
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                <ul class="list-unstyled">
-                                    <li>Date: January 2017</li>
-                                    <li>Client: Threads</li>
-                                    <li>Category: Illustration</li>
-                                </ul><button class="btn btn-primary" type="button" data-bs-dismiss="modal"><i class="fa fa-times"></i><span>&nbsp;Close Project</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade text-center portfolio-modal" role="dialog" tabindex="-1" id="portfolioModal4">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 mx-auto">
-                            <div class="modal-body">
-                                <h2 class="text-uppercase">Project Name</h2>
-                                <p class="text-muted item-intro">Lorem ipsum dolor sit amet consectetur.</p><img class="img-fluid d-block mx-auto" src="welcome_assets/img/portfolio/4-full.jpg">
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                <ul class="list-unstyled">
-                                    <li>Date: January 2017</li>
-                                    <li>Client: Threads</li>
-                                    <li>Category: Illustration</li>
-                                </ul><button class="btn btn-primary" type="button" data-bs-dismiss="modal"><i class="fa fa-times"></i><span>&nbsp;Close Project</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade text-center portfolio-modal" role="dialog" tabindex="-1" id="portfolioModal5">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 mx-auto">
-                            <div class="modal-body">
-                                <h2 class="text-uppercase">Project Name</h2>
-                                <p class="text-muted item-intro">Lorem ipsum dolor sit amet consectetur.</p><img class="img-fluid d-block mx-auto" src="welcome_assets/img/portfolio/5-full.jpg">
-                                <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
-                                <ul class="list-unstyled">
-                                    <li>Date: January 2017</li>
-                                    <li>Client: Threads</li>
-                                    <li>Category: Illustration</li>
-                                </ul><button class="btn btn-primary" type="button" data-bs-dismiss="modal"><i class="fa fa-times"></i><span>&nbsp;Close Project</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+    @include('landing-page-partials.modal')
+{{--     
     <div class="modal fade text-center portfolio-modal" role="dialog" tabindex="-1" id="portfolioModal6">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -364,10 +225,155 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <script src="welcome_assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="welcome_assets/js/bs-init.js"></script>
     <script src="welcome_assets/js/agency.js"></script>
+
+    <script>
+
+    // Set up CSRF token for all AJAX requests
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $(document).ready(function() {
+        // Initialize Portfolio Modal
+        $('.portfolio-link').on('click', function() {
+            var serviceId = $(this).data('id');
+            
+            // Initial state
+            $('#projects_datatable').html(''); // Clear the container
+            $('#PortfolioModal .section-heading').html('Loading Projects...'); // Set initial text
+
+            // Function to load and display projects
+            function loadProjects(page = 1, search = '') {
+                $.ajax({
+                    url: '/displayProjectsByService/' + serviceId,
+                    method: 'GET',
+                    data: {
+                        page: page,
+                        search: search
+                    },
+                    success: function(response) {
+                        // Update the modal header with the service name
+                        $('#PortfolioModal .section-heading').html(response.service_name + ' Projects');
+                        $('#ProjectModal #ProjectForm #service_id').val(serviceId);
+                        
+                        var projectContainer = $('<div class="row"></div>');
+                        
+                        // Render projects
+                        $.each(response.data, function(index, project) {
+                            var projectItem = $('<div class="col-md-4 mb-4"></div>');
+                            var content = '';
+                            
+                            switch (project.file_type) {
+                                case 'Video':
+                                    content = `<video controls width="100%" height="300" class="shadow" style="border-radius:20px;" frameborder="0">
+                                                    <source src="storage/${project.file_path}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>`+
+                                                `<div style="text-align:left!important;">
+                                                    <h4>${project.project_name}</h4>
+                                                    <h5>${project.sub_heading}</h5>
+                                                    <p style="margin-bottom:0px;">Client: ${project.client}</p>
+                                                    <p style="margin-bottom:0px;">Date: ${project.date}</p>
+                                                </div>`;
+                                    break;
+                                case 'Photo':
+                                    content = `<img class="shadow" style="border-radius:20px;" frameborder="0" src="storage/${project.file_path}" alt="Image" width="100%">${project.project_name}</img>`;
+                                    break;
+                                case 'Audio':
+                                    content =   `<div class="shadow" style="border-radius:5px; background-image:url('welcome_assets/img/portfolio/music_bg.png'); background-size: cover; background-position: center;">
+                                                <div style="text-align:left!important;  padding-left:5px;">
+                                                    <h4>${project.project_name}<span></h4>
+                                                    <h5>${project.sub_heading}</h5>
+                                                    <p style="margin-bottom:0px;">Client: ${project.client}</p>
+                                                    <p style="margin-bottom:0px;">Date: ${project.date}</p>
+                                                </div>`
+                                                +
+                                                `<audio controls style="width: 100%;">
+                                                    <source src="storage/${project.file_path}" type="audio/mpeg">
+                                                    Your browser does not support the audio element.
+                                                </audio></div>`;
+                                    break;
+                                case 'Link':
+                                    content = `<iframe src="${project.file_path}" width="100%" height="300" class="shadow" style="border-radius:20px;" frameborder="0"></iframe>`
+                                    +
+                                                `<div style="text-align:left!important;">
+                                                    <h4>${project.project_name}</h4>
+                                                    <h5>${project.sub_heading}</h5>
+                                                    <p style="margin-bottom:0px;">Client: ${project.client}</p>
+                                                    <p style="margin-bottom:0px;">Date: ${project.date}</p>
+                                                </div>`;
+                                    break;
+                                default:
+                                    content = 'Unsupported file type';
+                                    break;
+                            }
+
+                            projectItem.append(content);
+                            projectContainer.append(projectItem);
+                        });
+
+                        $('#projects_datatable').html(projectContainer);
+
+                        // Render pagination links
+                        $('#pagination').html(response.pagination);
+
+                        // If no projects found
+                        if (response.data.length === 0) {
+                            $('#projects_datatable').html('<div class="col-12 text-center">No projects found.</div>');
+                        }
+                    },
+                    error: function() {
+                        $('#PortfolioModal .section-heading').html('Error loading projects');
+                    }
+                });
+            }
+
+            // Load projects initially
+            loadProjects();
+
+            // Event listener for pagination
+            $(document).on('click', '.pagination a', function(e) {
+                e.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                var search = $('#search-input').val();
+                loadProjects(page, search);
+            });
+
+            // Event listener for search
+            $('#search-input').on('keyup', function() {
+                var search = $(this).val();
+                loadProjects(1, search); // Load first page with search term
+            });
+        });
+
+        // Insert search bar and pagination container
+        $('#PortfolioModal .modal-body').prepend(`
+            <div class="row mb-3 d-flex justify-content-end">
+                <div class="col-md-5">
+                    <input type="text" id="search-input" class="form-control shadow" placeholder="Search projects...">
+                </div>
+            </div>
+        `);
+
+        $('#PortfolioModal .modal-body').append(`
+            <div class="row mb-3 d-flex justify-content-center">
+                <div class="col-md-2 text-center">
+                    <div id="pagination" class="pagination">
+                        
+                    </div>
+                </div>
+            </div>
+        `);
+    });
+
+
+    </script>
 </body>
 
 </html>
